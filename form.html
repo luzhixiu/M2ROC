@@ -1,32 +1,50 @@
-<form action = "http://localhost:5000/login" method = "post">
-  <fieldset>
+<form action = "http://localhost:5000/login" method = "POST" 
+    enctype="multipart/form-data">
+    <fieldset>
     <legend>Plot Config:</legend>
-    <br>Please Upload Your Input File:<br>
+    <br>Please upload your input file:<br>
     <input type="file" name="file" accept="*/*">    
+    <br><br>	
+	
 
-    <br>Classifer Type:<br>
+    <br>Classifer type:<br>
     <input type="radio" name="classifier" value="SVM" checked>Support Vector Machine<br>
     <input type="radio" name="classifier" value="NB">Naive Bayes<br>
     <input type="radio" name="classifier" value="RF">Random Forest<br>
+
+    <br>Number of estimators (if you chose Random Forest as your classifier):<br>
+    <input type="text" name="estimators" value="10"><br>	
+
 
     <br>Would you like to average your result?:<br>
     <input type="radio" name="avg" value="Yes" checked>Yes<br>
     <input type="radio" name="avg" value="No"> No<br>	
     
 
+    <br>Feature Selection interval:<br>
+    <input type="text" name="interval" value=10><br>	
+
+
+    <br>Plot feature range:<br>
+    <input type="text" name="plotrange" value=85><br>
+
+    <br>Plot lengend size:<br>
+    <input type="text" name="legendsize" value=7.5><br>    
+    	  		
+    <br>Plot line width:<br>
+    <input type="text" name="plotlinewidth" value=2><br> 
+
+    <br>Legend title:<br>
+    <input type="text" name="legendtitle"><br>
 
 
 
 
-    
 
 
 
 
-
-
-
-
+<br><br>	
     <input type="reset">
     <input type="submit" value="Submit">
 

@@ -4,6 +4,7 @@ Number of Estimators:20
 Average the result: No           
 Threshold: [0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
 Feature Selection Interval: 10
+Show results in Console: No
 Plot feature range:85
 Plot lengend size:7.5
 Plot line width:2
