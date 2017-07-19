@@ -23,7 +23,6 @@ def login():
     if request.method == 'POST':
         f=request.files['file']
         workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',f.filename)
-        print workdir     
         f.save(workdir)
         classifier = request.form['classifier']
         estimators=request.form['estimators']
