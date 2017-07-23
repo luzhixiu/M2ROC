@@ -32,7 +32,7 @@ AverageRead=settings.get('SectionOne','Average the result')
 NumberOfEstimators=settings.get('SectionOne','Number of Estimators')
 
 Threshold=settings.get('SectionOne','Threshold')
-print (Threshold)
+#print (Threshold)
 FeastureSelectionInterVal=int(settings.get('SectionOne','Feature Selection Interval'))
 
 showResultConfig=settings.get('SectionOne','Show results in Console')
@@ -194,7 +194,7 @@ while(p<=featureRange):
         selectList.append(p)
    
    
-print selectList    
+#print selectList    
 for i in selectList:    
     print ("top features chosen "+str(i))
 #    process(my_data,"Relief",i)

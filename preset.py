@@ -44,15 +44,9 @@ def login():
         settings.set('SectionOne', 'plot lengend size', str(legendsize)) 
         settings.set('SectionOne', 'plot line width', str(plotlinewidth)) 
         settings.set('SectionOne', 'dataset type name', str(legendtitle))         
-        call(["python", "LeaveOneOut.py"])
-        
-        
-        
-        
-        
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
             settings.write(configfile)        
-        
+        call(["python2", "LeaveOneOut.py"])
         return redirect(url_for('get_image'))
         return redirect(url_for('success',name =testoutput ))
 if __name__ == '__main__':
