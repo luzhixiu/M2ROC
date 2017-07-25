@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request,send_file
+from flask import Flask, redirect, url_for, request,send_file,render_template
 import configparser
 from werkzeug import secure_filename
 import os
@@ -6,9 +6,9 @@ from subprocess import call
 
 app = Flask(__name__)
 
-@app.route('/success/<name>')
-def success(name):
-    return 'welcome! %s' % name
+@app.route('/')
+def start():
+    return render_template('form.html')
     
 @app.route('/get_image')
 def get_image():
@@ -18,8 +18,8 @@ def get_image():
        filename = 'download.jpg'
     return send_file(filename, mimetype='image/jpg')    
 
-@app.route('/login',methods = ['POST', 'GET'])
-def login():
+@app.route('/result',methods = ['POST', 'GET'])
+def result():
     if request.method == 'POST':
         f=request.files['file']
         workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',f.filename)
@@ -48,7 +48,7 @@ def login():
             settings.write(configfile)        
         call(["python2", "LeaveOneOut.py"])
         return redirect(url_for('get_image'))
-        return redirect(url_for('success',name =testoutput ))
+        
 if __name__ == '__main__':
     app.run(debug = True)
 
