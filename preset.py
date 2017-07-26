@@ -18,6 +18,18 @@ def get_image():
        filename = 'download.jpg'
     return send_file(filename, mimetype='image/jpg')    
 
+
+
+
+
+@app.route('/get_gallery')
+def get_gallery():
+
+
+
+
+
+
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
@@ -50,5 +62,6 @@ def result():
         return redirect(url_for('get_image'))
         
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.config['DEBUG'] = True	
+    app.run(host='0.0.0.0', port=80,)
 

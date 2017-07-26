@@ -1,0 +1,14 @@
+import glob
+from dominate import document
+from dominate.tags import *
+
+photos = glob.glob('OUTPUT_LOU/*.png')
+
+with document(title='Photos') as doc:
+    h1('Photos')
+    for path in photos:
+        div(img(src=path), _class='photo')
+
+
+with open('gallery.html', 'w') as f:
+    f.write(doc.render())
