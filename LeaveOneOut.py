@@ -4,6 +4,7 @@ from numpy import*
 from scipy import interp
 import copy
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 from sklearn.naive_bayes import GaussianNB
 from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
@@ -15,6 +16,7 @@ from sklearn.cross_validation import LeaveOneOut
 from numpy import genfromtxt
 from Tkinter import *
 import matplotlib as mpl
+mpl.use('Agg')
 import collections
 import configparser
 import os
