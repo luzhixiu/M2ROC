@@ -208,9 +208,9 @@ for i in selectList:
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title(title+' ON'+' TOP '+str(i)+' Features'+' '+'('+DataSetName+')')
+    plt.title(title+'_ON'+'_TOP '+str(i)+'_Features'+'_'+'('+DataSetName+')')
     plt.legend(loc="lower right",prop={'size':PlotLegendSize})
-    filename='Output(LeaveOneOut)/'+title+' TOP '+str(i)+' Features'
+    filename='OUTPUT_LOU/'+title+'_TOP_'+str(i)+'_Features'
     plt.savefig(filename)
     if'Y' in AverageRead or 'y' in showResultConfig:    
         plt.show()
@@ -232,8 +232,8 @@ plt.xlim([0, featureRange+1])
 plt.ylim([0.0, 1.05])
 plt.xlabel('No. of features')
 plt.ylabel('AUC')
-plt.title(title+' '+'('+DataSetName+')')
-filename='Output(LeaveOneOut)/'+title+' '+'('+DataSetName+')'
+plt.title(title+'_'+'('+DataSetName+')')
+filename='OUTPUT_LOU/'+title+'_'+'('+DataSetName+')'
 plt.legend(loc="lower right",prop={'size':PlotLegendSize})    
 plt.savefig(filename)
 if'Y' in AverageRead or 'y' in showResultConfig:

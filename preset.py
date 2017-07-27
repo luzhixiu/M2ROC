@@ -24,7 +24,7 @@ def get_image():
 
 @app.route('/get_gallery')
 def get_gallery():
-    call(["python2", "galleryMaker"])
+    call(["python2", "galleryMaker.py"])
     return render_template('gallery.html')
 
 
