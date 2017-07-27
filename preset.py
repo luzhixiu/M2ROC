@@ -24,7 +24,8 @@ def get_image():
 
 @app.route('/get_gallery')
 def get_gallery():
-
+    call(["python2", "galleryMaker"])
+    return render_template('gallery.html')
 
 
 
@@ -59,7 +60,7 @@ def result():
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
             settings.write(configfile)        
         call(["python2", "LeaveOneOut.py"])
-        return redirect(url_for('get_image'))
+        return redirect(url_for('get_gallery'))
         
 if __name__ == '__main__':
     app.config['DEBUG'] = True	
