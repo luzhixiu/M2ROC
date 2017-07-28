@@ -28,6 +28,10 @@ def get_gallery():
     return render_template('gallery.html')
 
 
+@app.route('/get_zip')
+def get_zip():
+    call(["zip","-r","OUTPUT_LOU","*"])
+    return send_file("OUTPUT_LOU.zip",mimetype='application/zip')	
 
 
 
@@ -60,7 +64,7 @@ def result():
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
             settings.write(configfile)        
         call(["python2", "LeaveOneOut.py"])
-        return redirect(url_for('get_gallery'))
+        return redirect(url_for('get_zip'))
         
 if __name__ == '__main__':
     app.config['DEBUG'] = True	
