@@ -19,7 +19,7 @@ def get_image():
     return send_file(filename, mimetype='image/jpg')    
 
 
-@app.route('/auc')
+@app.route('/auc',methods=['Post','GET'])
 def get_auc():
     return render_template('auc.html')
 
@@ -78,11 +78,11 @@ def result():
 	call(["python2", "LeaveOneOut.py"])
         return redirect(url_for('get_auc'))
         
-@app.route('/aucListener',methods = ['POST', 'GET'])
-def aucListener():
+@app.route('/auclistener',methods = ['POST', 'GET'])
+def auclistener():
     if request.method == 'POST':
         interval=request.form['interval']
-        print interval;
+        print interval
         return redirect(url_for('get_roc'))    
 
 

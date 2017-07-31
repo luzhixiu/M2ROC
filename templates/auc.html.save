@@ -13,7 +13,7 @@
    <br>
     <img id="auc" alt="Auc Result" src="" width:304px;height:228px;">
      
-    <form action = "http://52.15.44.99:80/auclistener " method = "POST"
+    <form action = "http://52.15.44.99:80/aucListener " method = "POST"
     <br>Please Choose Which Interval You Would Like to choose for you ROC results:<br>
     <br>Feature Selection Interval:
     <input type="text" name="interval" id="interval" value=10><br><br>
