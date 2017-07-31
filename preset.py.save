@@ -3,12 +3,12 @@ import configparser
 from werkzeug import secure_filename
 import os
 from subprocess import call
-import time
+
 app = Flask(__name__)
 
 @app.route('/')
 def start():
-     return render_template('form.html')
+    return render_template('form.html')
     
 @app.route('/get_image')
 def get_image():
@@ -34,23 +34,23 @@ def get_zip():
     return send_file("OUTPUT_LOU.zip",mimetype='application/zip')	
 
 
-
+@synchronized
 def clear():
     os.system("sudo ./reinitiate.sh")
-    time.sleep(2)
 
 
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-    clear()
+    os.system("sudo ./reinitiate.sh")
     if request.method == 'POST':   	
         f=request.files['file']                
 	if f.filename=="":
-            os.system("cp Relief.csv Input\(LeaveOneOut\)/")
+            workdir=os.path.join(os.getcwd(),'Input(LeaveOneOut)',"Relief.csv")
         else: 
             workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',f.filename)
-   	    f.save(workdir)
+        print(workdir)
+	f.save(workdir)
         classifier = request.form['classifier']
         estimators=request.form['estimators']
         avg=request.form['avg']

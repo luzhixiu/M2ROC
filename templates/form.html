@@ -10,11 +10,19 @@
     enctype="multipart/form-data">
     <fieldset>
     <legend>Plot Config:</legend>
-    <br>Please upload your input file/files:<br>
-    <input type="file" name="file" id="file" accept="*/*"" multiple>    	
-    <br>or<br>	
-    <input type="button" name="samplebutton" value="Load a Sample File" onclick="loadSample()"/>
-    <font color="red" id="p1">This is some text!</font> 
+    <br>
+    <font size="5" id="p1">Please upload your input file:</font>
+    
+    <br>
+    <input type="file" name="file" id="file" accept="*/*"" >    	
+    <br>
+    
+    <font id="or" or ></font>
+    <br>	
+    
+    <input type="button" name="samplebutton" id="load"value="Load a Sample File" onclick="loadSample()"/>
+    <br>
+    <font color="green" id="p2"></font> 
    	
 	 
     <br>
@@ -31,11 +39,6 @@
     <input type="radio" name="avg" value="Yes" checked>Yes<br>
     <input type="radio" name="avg" value="No"> No<br>	
 	    
-
-    <br>Feature Selection interval:<br>
-    <input type="text" name="interval" id ="interval" value=10><br>	
-
-
     <br>Plot feature range:<br>
     <input type="text" name="plotrange" value=85><br>
 
