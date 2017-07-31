@@ -37,8 +37,8 @@ def get_zip():
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-    os.system("./reinitiate.sh")
-    if request.method == 'POST':
+    os.system("sudo ./reinitiate.sh")
+    if request.method == 'POST':   	
         f=request.files['file']
         workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',f.filename)
         f.save(workdir)
@@ -63,12 +63,12 @@ def result():
         settings.set('SectionOne', 'plot line width', str(plotlinewidth)) 
         settings.set('SectionOne', 'dataset type name', str(legendtitle))         
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
-            settings.write(configfile)        
-	os.system('rm OUTPUT_LOU/*')       
+            settings.write(configfile)               
 	call(["python2", "LeaveOneOut.py"])
         return redirect(url_for('get_zip'))
         
 if __name__ == '__main__':
     app.config['DEBUG'] = True	
     app.run(host='0.0.0.0', port=80,)
+
 

@@ -1,15 +1,23 @@
+<!DOCTYPE html>
+
+
+
+<body>
+
+
+
 <form action = "http://52.15.44.99:80/result " method = "POST" 
     enctype="multipart/form-data">
     <fieldset>
     <legend>Plot Config:</legend>
-    <br>Please upload your input file:<br>
-    <input type="file" name="file" accept="*/*">    
-    <br><br>	
-	
-    <br>Download Sample Input File<br>
-    <a href="http://biocoms.org/wp-content/uploads/2017/07/Information-Gain.csv" download="Sample.csv">Download</a>
-   
-
+    <br>Please upload your input file/files:<br>
+    <input type="file" name="file" id="file" accept="*/*"" multiple>    	
+    <br>or<br>	
+    <input type="button" name="samplebutton" value="Load a Sample File" onclick="loadSample()"/>
+    <font color="red" id="p1">This is some text!</font> 
+   	
+	 
+    <br>
     <br>Classifer type:<br>
     <input type="radio" name="classifier" value="SVM" checked>Support Vector Machine<br>
     <input type="radio" name="classifier" value="NB">Naive Bayes<br>
@@ -22,10 +30,10 @@
     <br>Would you like to average your result?:<br>
     <input type="radio" name="avg" value="Yes" checked>Yes<br>
     <input type="radio" name="avg" value="No"> No<br>	
-    
+	    
 
     <br>Feature Selection interval:<br>
-    <input type="text" name="interval" value=10><br>	
+    <input type="text" name="interval" id ="interval" value=10><br>	
 
 
     <br>Plot feature range:<br>
@@ -55,3 +63,10 @@
 
   </fieldset>
 </form>
+
+<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+
+
+</html>
