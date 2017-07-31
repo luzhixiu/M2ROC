@@ -30,13 +30,14 @@ def get_gallery():
 
 @app.route('/get_zip')
 def get_zip():
-    call(["zip","-r","OUTPUT_LOU","*"])
+    os.system("zip -r OUTPUT_LOU.zip OUTPUT_LOU/")
     return send_file("OUTPUT_LOU.zip",mimetype='application/zip')	
 
 
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
+    os.system("./reinitiate.sh")
     if request.method == 'POST':
         f=request.files['file']
         workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',f.filename)
@@ -63,7 +64,8 @@ def result():
         settings.set('SectionOne', 'dataset type name', str(legendtitle))         
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
             settings.write(configfile)        
-        call(["python2", "LeaveOneOut.py"])
+	os.system('rm OUTPUT_LOU/*')       
+	call(["python2", "LeaveOneOut.py"])
         return redirect(url_for('get_zip'))
         
 if __name__ == '__main__':
