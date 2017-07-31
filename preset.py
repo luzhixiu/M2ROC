@@ -39,8 +39,11 @@ def get_zip():
 def result():
     os.system("sudo ./reinitiate.sh")
     if request.method == 'POST':   	
-        f=request.files['file']
-        workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',f.filename)
+        f=request.files['file']                
+        if f=="":
+            workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',"Relief.csv")
+        else: 
+            workdir=os.path.join(os.getcwd(), 'Input(LeaveOneOut)',f.filename)
         f.save(workdir)
         classifier = request.form['classifier']
         estimators=request.form['estimators']
