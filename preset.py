@@ -21,6 +21,7 @@ def get_image():
 
 @app.route('/auc',methods=['Post','GET'])
 def get_auc():
+    os.system("python mvOutput.py")
     return render_template('auc.html')
 
 
