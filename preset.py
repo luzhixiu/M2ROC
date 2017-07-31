@@ -19,13 +19,15 @@ def get_image():
     return send_file(filename, mimetype='image/jpg')    
 
 
+@app.route('/auc')
+def get_auc():
+    return render_template('auc.html')
 
 
+@app.route('/roc')
+def get_roc():
+   return render_template('roc.html')
 
-@app.route('/get_gallery')
-def get_gallery():
-    call(["python2", "galleryMaker.py"])
-    return render_template('gallery.html')
 
 
 @app.route('/get_zip')
@@ -37,7 +39,7 @@ def get_zip():
 
 def clear():
     os.system("sudo ./reinitiate.sh")
-    time.sleep(2)
+    time.sleep(1)
 
 
 
@@ -74,8 +76,17 @@ def result():
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
             settings.write(configfile)               
 	call(["python2", "LeaveOneOut.py"])
-        return redirect(url_for('get_zip'))
+        return redirect(url_for('get_auc'))
         
+@app.route('/aucListener',methods = ['POST', 'GET'])
+def aucListener():
+    if request.method == 'POST':
+        interval=request.form['interval']
+        print interval;
+        return redirect(url_for('get_roc'))    
+
+
+
 if __name__ == '__main__':
     app.config['DEBUG'] = True	
     app.run(host='0.0.0.0', port=80,)

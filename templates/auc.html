@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AUC Result</title>
+    <script type="text/javascript" src="{{ url_for('static', filename='loadAuc.js') }}">
+    </script>
+      
+
+  </head>
+  <body>
+ 
+    <font size="5"> Below is Your AUC Result: </font> 
+   <br>
+    <img id="auc" alt="Auc Result" src="" width:304px;height:228px;">
+     
+    <form action = "http://52.15.44.99:80/auc " method = "POST"
+    <br>Please Choose Which Interval You Would Like to choose for you ROC results:<br>
+    <br>Feature Selection Interval:
+    <input type="text" name="interval" id="interval" value=10><br><br>
+    <input type="reset">
+    <b>&nbsp</b>               
+    <input type="submit" value="Submit"> 
+    </form>
+        
+
+      
+  </body>
