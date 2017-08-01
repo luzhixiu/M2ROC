@@ -24,11 +24,12 @@ def add_header(r):
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
 
+@app.route('/random_image')
+def random_image():
+    names = os.listdir(os.path.join(app.static_folder, 'imgs'))
+    img_url = url_for('static', filename=os.path.join('imgs', choice(names)))
 
-
-
-
-
+    return render_template('random_image.html', img_url=img_url)
 
 @app.route('/')
 def start():

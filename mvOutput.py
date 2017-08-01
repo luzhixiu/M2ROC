@@ -9,7 +9,7 @@ def extraNumber(str):
     print num[0]
     return num[0]
 
-newFolder="RESULT/"
+newFolder="static/"
 
 workdir=os.path.join(os.getcwd(),'OUTPUT_LOU/')
 print(os.getcwd())
