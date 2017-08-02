@@ -1,16 +1,10 @@
-from flask import Flask, redirect, url_for, request,send_file,render_template
+from flask import Flask, redirect, url_for, request,send_file,render_template,send_from_directory
 import configparser
 from werkzeug import secure_filename
 import os
 from subprocess import call
 import time
 app = Flask(__name__)
-
-
-
-
-
-
 
 @app.after_request
 def add_header(r):
@@ -23,12 +17,6 @@ def add_header(r):
     r.headers["Expires"] = "0"
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
-
-
-
-
-
-
 
 @app.route('/')
 def start():
@@ -66,6 +54,8 @@ def clear():
     os.system("sudo ./reinitiate.sh")
     time.sleep(1)
 
+def hasNumbers(inputString):
+    return any(char.isdigit() for char in inputString)
 
 
 @app.route('/result',methods = ['POST', 'GET'])
@@ -108,7 +98,22 @@ def auclistener():
     if request.method == 'POST':
         interval=request.form['interval']
         print interval
-        return redirect(url_for('get_roc'))    
+        return redirect(url_for('get_gallery'))    
+
+
+@app.route('/gallery')
+def get_gallery():
+    static_names = os.listdir('./static')
+    imgList=[]
+    for name in static_names:
+        if hasNumbers(name):
+            imgList.append(name)
+    imgList.sort()
+    return render_template("gallery.html", image_names=imgList)
+
+@app.route('/upload/<filename>')
+def send_image(filename):
+    return send_from_directory("static", filename)
 
 
 

@@ -8,5 +8,5 @@ show results in console = No
 plot feature range = 85
 plot lengend size = 7.5
 plot line width = 2
-dataset type name = 
+dataset type name = Sample
 
