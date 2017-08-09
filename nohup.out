@@ -4951,3 +4951,13 @@ Traceback (most recent call last):
   File "/usr/lib/python2.7/socket.py", line 228, in meth
     return getattr(self._sock,name)(*args)
 socket.error: [Errno 98] Address already in use
+Traceback (most recent call last):
+  File "/home/ubuntu/LabTool1/preset.py", line 133, in <module>
+    app.run(host='0.0.0.0', port=80,)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/flask/app.py", line 841, in run
+    run_simple(host, port, self, **options)
+  File "/home/ubuntu/.local/lib/python2.7/site-packages/werkzeug/serving.py", line 720, in run_simple
+    s.bind((hostname, port))
+  File "/usr/lib/python2.7/socket.py", line 228, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 98] Address already in use

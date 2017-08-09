@@ -5,7 +5,7 @@ def hasNumbers(inputString):
     return any(char.isdigit() for char in inputString)
     
 def extraNumber(str):
-    num=[int(s) for s in str.split('_') if s.isdigit()]
+    num=[int(s) for s in str.split(' ') if s.isdigit()]
     print num[0]
     return num[0]
 

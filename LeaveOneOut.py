@@ -208,9 +208,9 @@ for i in selectList:
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title(title+'_ON'+'_TOP '+str(i)+'_Features'+'_'+'('+DataSetName+')')
+    plt.title(title+' ON'+' TOP '+str(i)+' Features'+' '+'('+DataSetName+')')
     plt.legend(loc="lower right",prop={'size':PlotLegendSize})
-    filename='OUTPUT_LOU/'+title+'_TOP_'+str(i)+'_Features'
+    filename='OUTPUT_LOU/'+title+' TOP '+str(i)+' Features'
     plt.savefig(filename)
     if'Y' in AverageRead or 'y' in showResultConfig:    
         plt.show()

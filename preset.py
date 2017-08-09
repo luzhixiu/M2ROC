@@ -60,6 +60,7 @@ def hasNumbers(inputString):
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
+    os.chdir("/home/ubuntu/LabTool1") 
     clear()
     os.system("rm Input\(LeaveOneOut\)/*")
     if request.method == 'POST':   	
@@ -118,12 +119,21 @@ def get_gallery():
     for name in static_names:
         if hasNumbers(name):
             imgList.append(name)
-    imgList.sort()
-    return render_template("gallery.html", image_names=imgList)
+    
+    return render_template("gallery.html", image_names=sorted(imgList,cmp=sortByNumber))
 
 @app.route('/upload/<filename>')
 def send_image(filename):
     return send_from_directory("static", filename)
+
+
+def sortByNumber(a,b):
+    return (extraNumber(a)-extraNumber(b))
+
+def extraNumber(str):
+    num=[int(s) for s in str.split('.') if s.isdigit()]
+    return num[0]
+
 
 
 
