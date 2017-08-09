@@ -1,3 +1,3 @@
 
-sudo pkill python
-sudo /usr/bin/python /home/ubuntu/LabTool1/preset.py
+sudo pkill gunicorn
+sudo gunicorn --bind 0.0.0.0:80 preset:app

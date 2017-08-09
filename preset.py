@@ -4,7 +4,9 @@ from werkzeug import secure_filename
 import os
 from subprocess import call
 import time
+from werkzeug.contrib.fixers import ProxyFix
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 @app.after_request
 def add_header(r):

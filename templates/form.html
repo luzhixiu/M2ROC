@@ -4,8 +4,8 @@
 
 <body>
 
-
-
+<script type="text/javascript" src="{{ url_for('static', filename='loadFile.js') }}">
+    </script>
 <form action = "http://52.15.44.99:80/result " method = "POST" 
     enctype="multipart/form-data">
     <fieldset>
@@ -51,17 +51,12 @@
     <br>Legend title:<br>
     <input type="text" name="legendtitle" value="Sample"> <br>
 
-
-
-
-
-
-
-
 <br><br>	
-    <input type="reset">
-    <input type="submit" value="Submit">
 
+    
+    <input type="reset">
+    <input type="submit" name="submit" id="submit" value="Submit">
+    <img id="loading" src="{{ url_for('static', filename='loading.gif') }}"  style="display: none;"> 
     
 
   </fieldset>

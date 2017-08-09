@@ -4961,3 +4961,234 @@ Traceback (most recent call last):
   File "/usr/lib/python2.7/socket.py", line 228, in meth
     return getattr(self._sock,name)(*args)
 socket.error: [Errno 98] Address already in use
+[2017-08-09 08:41:07 +0000] [9283] [INFO] Starting gunicorn 19.4.5
+[2017-08-09 08:41:07 +0000] [9283] [INFO] Listening at: http://0.0.0.0:80 (9283)
+[2017-08-09 08:41:07 +0000] [9283] [INFO] Using worker: sync
+[2017-08-09 08:41:07 +0000] [9288] [INFO] Booting worker with pid: 9288
+rm: cannot remove 'OUTPUT_LOU.zip': No such file or directory
+rm: cannot remove 'RESULT/*': No such file or directory
+/home/ubuntu/.local/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+/home/ubuntu/.local/lib/python2.7/site-packages/matplotlib/__init__.py:913: UserWarning: axes.color_cycle is deprecated and replaced with axes.prop_cycle; please use the latter.
+  warnings.warn(self.msg_depr % (key, alt_key))
+top features chosen 1
+top features chosen 10
+top features chosen 20
+top features chosen 30
+top features chosen 40
+top features chosen 50
+top features chosen 60
+top features chosen 70
+top features chosen 80
+total process time9
+/home/ubuntu/LabTool1
+/home/ubuntu/LabTool1/OUTPUT_LOU/
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM_(Sample).png
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 30 Features.png
+30
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 1 Features.png
+1
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 70 Features.png
+70
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 80 Features.png
+80
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 10 Features.png
+10
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 20 Features.png
+20
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 40 Features.png
+40
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 50 Features.png
+50
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 60 Features.png
+60
+[2017-08-09 08:41:26 +0000] [9283] [INFO] Handling signal: hup
+[2017-08-09 08:41:26 +0000] [9283] [INFO] Hang up: Master
+[2017-08-09 08:41:26 +0000] [9311] [INFO] Booting worker with pid: 9311
+rm: cannot remove 'OUTPUT_LOU.zip': No such file or directory
+rm: cannot remove 'RESULT/*': No such file or directory
+/home/ubuntu/.local/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+/home/ubuntu/.local/lib/python2.7/site-packages/matplotlib/__init__.py:913: UserWarning: axes.color_cycle is deprecated and replaced with axes.prop_cycle; please use the latter.
+  warnings.warn(self.msg_depr % (key, alt_key))
+top features chosen 1
+top features chosen 10
+top features chosen 20
+top features chosen 30
+top features chosen 40
+top features chosen 50
+top features chosen 60
+top features chosen 70
+top features chosen 80
+total process time9
+/home/ubuntu/LabTool1
+/home/ubuntu/LabTool1/OUTPUT_LOU/
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM_(Sample).png
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 30 Features.png
+30
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 1 Features.png
+1
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 70 Features.png
+70
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 80 Features.png
+80
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 10 Features.png
+10
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 20 Features.png
+20
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 40 Features.png
+40
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 50 Features.png
+50
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 60 Features.png
+60
+rm: cannot remove 'OUTPUT_LOU.zip': No such file or directory
+rm: cannot remove 'RESULT/*': No such file or directory
+/home/ubuntu/.local/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+/home/ubuntu/.local/lib/python2.7/site-packages/matplotlib/__init__.py:913: UserWarning: axes.color_cycle is deprecated and replaced with axes.prop_cycle; please use the latter.
+  warnings.warn(self.msg_depr % (key, alt_key))
+top features chosen 1
+top features chosen 10
+top features chosen 20
+top features chosen 30
+top features chosen 40
+top features chosen 50
+top features chosen 60
+top features chosen 70
+top features chosen 80
+total process time9
+/home/ubuntu/LabTool1
+/home/ubuntu/LabTool1/OUTPUT_LOU/
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM_(Sample).png
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 30 Features.png
+30
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 1 Features.png
+1
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 70 Features.png
+70
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 80 Features.png
+80
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 10 Features.png
+10
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 20 Features.png
+20
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 40 Features.png
+40
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 50 Features.png
+50
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 60 Features.png
+60
+rm: cannot remove 'OUTPUT_LOU.zip': No such file or directory
+rm: cannot remove 'RESULT/*': No such file or directory
+/home/ubuntu/.local/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+/home/ubuntu/.local/lib/python2.7/site-packages/matplotlib/__init__.py:913: UserWarning: axes.color_cycle is deprecated and replaced with axes.prop_cycle; please use the latter.
+  warnings.warn(self.msg_depr % (key, alt_key))
+top features chosen 1
+top features chosen 10
+top features chosen 20
+top features chosen 30
+top features chosen 40
+top features chosen 50
+top features chosen 60
+top features chosen 70
+top features chosen 80
+total process time9
+/home/ubuntu/LabTool1
+/home/ubuntu/LabTool1/OUTPUT_LOU/
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM_(Sample).png
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 30 Features.png
+30
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 1 Features.png
+1
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 70 Features.png
+70
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 80 Features.png
+80
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 10 Features.png
+10
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 20 Features.png
+20
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 40 Features.png
+40
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 50 Features.png
+50
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 60 Features.png
+60
+rm: cannot remove 'OUTPUT_LOU.zip': No such file or directory
+rm: cannot remove 'RESULT/*': No such file or directory
+/home/ubuntu/.local/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+/home/ubuntu/.local/lib/python2.7/site-packages/matplotlib/__init__.py:913: UserWarning: axes.color_cycle is deprecated and replaced with axes.prop_cycle; please use the latter.
+  warnings.warn(self.msg_depr % (key, alt_key))
+top features chosen 1
+top features chosen 10
+top features chosen 20
+top features chosen 30
+top features chosen 40
+top features chosen 50
+top features chosen 60
+top features chosen 70
+top features chosen 80
+total process time9
+/home/ubuntu/LabTool1
+/home/ubuntu/LabTool1/OUTPUT_LOU/
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM_(Sample).png
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 30 Features.png
+30
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 1 Features.png
+1
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 70 Features.png
+70
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 80 Features.png
+80
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 10 Features.png
+10
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 20 Features.png
+20
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 40 Features.png
+40
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 50 Features.png
+50
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 60 Features.png
+60
+rm: cannot remove 'OUTPUT_LOU.zip': No such file or directory
+rm: cannot remove 'RESULT/*': No such file or directory
+/home/ubuntu/.local/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+/home/ubuntu/.local/lib/python2.7/site-packages/matplotlib/__init__.py:913: UserWarning: axes.color_cycle is deprecated and replaced with axes.prop_cycle; please use the latter.
+  warnings.warn(self.msg_depr % (key, alt_key))
+top features chosen 1
+top features chosen 10
+top features chosen 20
+top features chosen 30
+top features chosen 40
+top features chosen 50
+top features chosen 60
+top features chosen 70
+top features chosen 80
+total process time9
+/home/ubuntu/LabTool1
+/home/ubuntu/LabTool1/OUTPUT_LOU/
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM_(Sample).png
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 30 Features.png
+30
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 1 Features.png
+1
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 70 Features.png
+70
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 80 Features.png
+80
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 10 Features.png
+10
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 20 Features.png
+20
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 40 Features.png
+40
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 50 Features.png
+50
+/home/ubuntu/LabTool1/OUTPUT_LOU/SVM TOP 60 Features.png
+60
+[2017-08-09 09:00:01 +0000] [9283] [INFO] Handling signal: term
+[2017-08-09 09:00:31 +0000] [9283] [INFO] Shutting down: Master
