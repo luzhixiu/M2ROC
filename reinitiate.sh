@@ -1,4 +1,4 @@
-sudo rm -r Input\(LeaveOneOut\)/*
+
 sudo rm -r OUTPUT_LOU/*
 sudo rm OUTPUT_LOU.zip
 sudo rm -r RESULT/*

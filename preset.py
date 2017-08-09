@@ -61,6 +61,7 @@ def hasNumbers(inputString):
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     clear()
+    os.system("rm Input\(LeaveOneOut\)/*")
     if request.method == 'POST':   	
         f=request.files['file']                
 	if f.filename=="":
@@ -90,7 +91,7 @@ def result():
         settings.set('SectionOne', 'dataset type name', str(legendtitle))         
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
             settings.write(configfile)               
-	call(["python2", "LeaveOneOut.py"])
+        call(["python2", "LeaveOneOut.py"])
         return redirect(url_for('get_auc'))
         
 @app.route('/auclistener',methods = ['POST', 'GET'])
@@ -98,6 +99,15 @@ def auclistener():
     if request.method == 'POST':
         interval=request.form['interval']
         print interval
+        clear()
+        settings = configparser.ConfigParser()
+        settings._interpolation = configparser.ExtendedInterpolation()
+        settings.read('LeaveOneOutConfig.txt')
+        settings.set('SectionOne', 'feature selection interval', str(interval))
+        with open('LeaveOneOutConfig.txt', 'wb') as configfile:
+            settings.write(configfile)
+        call(["python2", "LeaveOneOut.py"])
+        os.system("python mvOutput.py")
         return redirect(url_for('get_gallery'))    
 
 
