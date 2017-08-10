@@ -32,8 +32,14 @@
     <input type="radio" name="classifier" value="RF">Random Forest<br>
 
     <br>Number of estimators (if you chose Random Forest as your classifier):<br>
-    <input type="text" name="estimators" value="10"><br>		
-	   
+    <input type="text" name="estimators" value="10"><br>	
+
+
+    <br>Would you like to average your result?:<br>
+    <input type="radio" name="avg" value="Yes" checked>Yes<br>
+    <input type="radio" name="avg" value="No"> No<br>	
+	    
+    
     <br>Plot lengend size:<br>
     <input type="text" name="legendsize" value=7.5><br>    
     	  		
@@ -44,7 +50,7 @@
     <input type="text" name="legendtitle" value="Sample"> <br>
 
 <br><br>	
-    
+
     
     <input type="reset">
     <input type="submit" name="submit" id="submit" value="Submit">

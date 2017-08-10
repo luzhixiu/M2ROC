@@ -5,6 +5,8 @@ import os
 from subprocess import call
 import time
 from werkzeug.contrib.fixers import ProxyFix
+from numpy import genfromtxt
+
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
@@ -74,9 +76,7 @@ def result():
    	    f.save(workdir)
         classifier = request.form['classifier']
         estimators=request.form['estimators']
-        avg=request.form['avg']
         interval="10"
-        plotrange=request.form['plotrange']
         legendsize=request.form['legendsize']
         plotlinewidth=request.form['plotlinewidth']
         legendtitle=request.form['legendtitle']
@@ -86,9 +86,9 @@ def result():
         settings.read('LeaveOneOutConfig.txt')
         settings.set('SectionOne', 'Classifier', str(classifier))   
         settings.set('SectionOne', 'number of estimators', str(estimators))
-        settings.set('SectionOne', 'average the result', str(avg))
         settings.set('SectionOne', 'feature selection interval', str(interval)) 
-        settings.set('SectionOne', 'plot feature range', str(plotrange))
+        featureRange=getFileFeatureRange() 
+        settings.set('SectionOne', 'plot feature range', str(featureRange))
         settings.set('SectionOne', 'plot lengend size', str(legendsize)) 
         settings.set('SectionOne', 'plot line width', str(plotlinewidth)) 
         settings.set('SectionOne', 'dataset type name', str(legendtitle))         
@@ -101,12 +101,17 @@ def result():
 def auclistener():
     if request.method == 'POST':
         interval=request.form['interval']
+        maxFeature=request.form['maxrange']
+        avg=request.form['avg']
         print interval
+        print maxFeature
         clear()
         settings = configparser.ConfigParser()
         settings._interpolation = configparser.ExtendedInterpolation()
         settings.read('LeaveOneOutConfig.txt')
+        settings.set('SectionOne', 'average the result', str(avg)) 
         settings.set('SectionOne', 'feature selection interval', str(interval))
+        settings.set('SectionOne','plot feature range',str(maxFeature) )
         with open('LeaveOneOutConfig.txt', 'wb') as configfile:
             settings.write(configfile)
         call(["python2", "LeaveOneOut.py"])
@@ -136,6 +141,15 @@ def extraNumber(str):
     num=[int(s) for s in str.split('.') if s.isdigit()]
     return num[0]
 
+
+def getFileFeatureRange():
+    maxLength=0
+    flist=os.listdir("Input(LeaveOneOut)")
+    for f in flist:
+        data=genfromtxt(('Input(LeaveOneOut)/'+f),delimiter=',')
+        if data.shape[1]>maxLength:
+            maxLength=data.shape[1]
+    return (maxLength+3)
 
 
 

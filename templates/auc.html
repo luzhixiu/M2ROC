@@ -11,11 +11,21 @@
     <font size="5"> Below is Your AUC Result: </font> 
    <br>
     <img id="auc" alt="Auc Result" src="{{ url_for('static', filename='auc.png') }}" width:304px;height:228px;">
-     
+    
+
     <form action = "http://52.15.44.99:80/auclistener " method = "POST"
-    <br>Please Choose Which Interval You Would Like to choose for you ROC results:<br>
-    <br>Feature Selection Interval:
-    <input type="text" name="interval" id="interval" value=10><br><br>
+    <br>
+    Top Features Included:
+    <input type="text" name="maxrange" id="maxrange"><br>
+
+    <br>
+    Interval For Features:
+    <input type="text" name="interval" id="interval" value=10><br>
+    
+    <br>Would you like to average your result?:<br>
+    <input type="radio" name="avg" value="No" checked>Yes<br>
+    <input type="radio" name="avg" value="Yes"> No<br> 
+
     <input type="reset">
     <input type="submit" id="submit" value="Submit"> 
     <img id="loading" alt="loading" src="{{ url_for('static', filename='loading.gif') }}" style="display: none;"> 

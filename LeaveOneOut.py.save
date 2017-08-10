@@ -189,7 +189,7 @@ flist=os.listdir("Input(LeaveOneOut)")
 selectList=[]
 selectList.append(1)
 p=0
-maxLength=0
+featureRange=
 while(p<=featureRange):
     p+=FeastureSelectionInterVal
     if(p<=featureRange):    
