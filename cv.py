@@ -19,8 +19,6 @@ from Tkinter import *
 import matplotlib as mpl
 import configparser
 import os
-import random
-from os.path import basename
 from sklearn.utils import shuffle
 from sklearn.model_selection import KFold
 from collections import defaultdict
@@ -53,11 +51,6 @@ def loadMaxFeature():
                 maxAttribute=rawdata.shape[1]-1
         return maxAttribute
             
-    
-    
-
-
-
 def process(X,y,classN):
 #     print "process class %d"%(classN)
     global classifier
