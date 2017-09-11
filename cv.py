@@ -30,7 +30,8 @@ title="Receiver operating characteristic example"
 showClassROC=False
 NumberOfEstimators=10 #this is only used for random forest
 addNoise=20
-inputFolder="/home/lu/Desktop/ROCInput"
+inputFolder="/home/lu/eclipse-workspace/LabTool/FeatureSelected"
+# inputFolder="/home/lu/Desktop/ROCInput"
 topFeature=4
 legendSize=10
 
@@ -38,6 +39,36 @@ legendSize=10
 mpl.rcParams['axes.color_cycle'] = ['red','plum','steelblue','orange','yellow','green','cyan','blue','purple','black']
 np.set_printoptions(suppress=True)
 random_state = np.random.RandomState(0)
+
+
+
+
+
+
+def NumberLabels():
+    flist=os.listdir(inputFolder)
+    for fname in flist:
+        path=os.path.join(inputFolder,fname)
+        labelDict=dict()
+        with open(path,"r") as f:
+            lines=f.readlines()
+            labelSet=set()
+            for line in lines:
+                splitList=line.split(",")
+                labelSet.add(splitList[len(splitList)-1])
+            print fname
+            i=0   
+            for item in labelSet:
+                labelDict[item]=i
+                i+=1
+            
+        with open(path,"w") as f:
+            for line in lines:
+                splitList=line.split(",")
+                splitList[len(splitList)-1]= labelDict[splitList[len(splitList)-1]]
+                writeString=",".join(str(x) for x in splitList)
+                print writeString
+                f.write(writeString+"\n")
 
 
 def loadMaxFeature():
@@ -70,7 +101,7 @@ def process(X,y,classN):
 
     roc_auc_class_micro = auc(class_fpr_micro,class_tpr_micro)
     if showClassROC:
-        plt.plot(class_fpr_micro, class_tpr_micro,label='Class micro-average ROC curve (area = {0:0.2f})'''.format(roc_auc_class_micro ),linewidth=lw)
+        plt.plot(class_fpr_micro, class_tpr_micro,label='Class  micro-average ROC curve (area = {0:0.2f})'''.format(roc_auc_class_micro ),linewidth=lw)
     
 def loadClassifier(cls):
     global classifier,title
@@ -205,7 +236,7 @@ def processFolder(folder):
      
 X=0
 y=0
-
+NumberLabels()
 
 originTopFeature=loadMaxFeature()
 aucMatrix=[]
@@ -234,7 +265,6 @@ for featureList in aucMatrix:#featureList represents features chosen
         NTL[k].append(featureList[k])
 
 for k in NTL.keys():
-    print NTL[k]
     xList=range(1,len(NTL[k])+1)
     yList=NTL[k]
     plt.plot(xList,yList,label=indexToFname[k],marker=".")
