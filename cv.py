@@ -69,6 +69,7 @@ def NumberLabels():
                 writeString=",".join(str(x) for x in splitList)
                 print writeString
                 f.write(writeString+"\n")
+        
 
 
 def loadMaxFeature():

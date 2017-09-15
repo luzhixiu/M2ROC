@@ -1,18 +1,29 @@
-from flask import Flask, redirect, url_for, request
-app = Flask(__name__)
+# coding: utf-8
 
-@app.route('/success/<name>')
-def success(name):
-   return 'welcome %s' % name
+# ipython notebook requires this
+# %matplotlib inline
 
-@app.route('/login',methods = ['POST', 'GET'])
-def login():
-   if request.method == 'POST':
-      user = request.form['firstname']
-      return redirect(url_for('success',name = user))
-   else:
-      user = request.args.get('lastname')
-      return redirect(url_for('success',name = user))
+# python console requires this
+import matplotlib
+matplotlib.use('Agg')
 
-if __name__ == '__main__':
-   app.run(debug = True)
+import matplotlib.pyplot as plt
+import venn
+
+
+
+A=[1,2,3,4,5]
+B=[2,3,4,5,6]
+C=[3,4,5,6,7]
+D=[7,8,9]
+E=[1,2,4,6,7]
+
+label1=venn.get_labels([A,B,C,D,E],fill=['number'])
+label2=venn.get_labels([A,B,C,D,E],fill=['number','logic'])
+print label1
+print label2
+fig, ax = venn.venn5(label2, names=['list 1', 'list 2', 'list 3', 'list 4', 'list 5'])
+fig.savefig('venn5.png', bbox_inches='tight')
+
+plt.close()
+

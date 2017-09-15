@@ -29,7 +29,7 @@ os.system(command) #works like a charm!
 # format the data for processing(rid the weka markers)
 import Format
 
-#process the files (cv.py)
+# process the files (cv.py)
 import cv
 
 
