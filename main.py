@@ -11,11 +11,7 @@ import os
 # process the files (cv.py)
 
 # take in a file
-import os
-path=os.path.join(os.getcwd(),"rawiris.csv")
-f=open(path,"r")
-
-
+f=open("/home/lu/eclipse-workspace/LabTool/rawiris.csv","r")
 print f.name
 
 # label the attributes by their hashing

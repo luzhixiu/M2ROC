@@ -1,7 +1,5 @@
-import os
-path=os.path.join(os.getcwd(),"rawiris.csv")
-f=open(path,"r")
 
+f=open("/home/lu/eclipse-workspace/LabTool/rawiris.csv","r")
 lines=f.readlines()
 
 hashList=list()
