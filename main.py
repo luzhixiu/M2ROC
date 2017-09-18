@@ -1,5 +1,5 @@
 import os
-
+import sys
 
 
 
@@ -11,12 +11,17 @@ import os
 # process the files (cv.py)
 
 # take in a file
-f=open("/home/lu/eclipse-workspace/LabTool/rawiris.csv","r")
-print f.name
 
-# label the attributes by their hashing
-import LabelAttributes as LA
-originHash=LA.hashList
+f=open(os.path.join(os.getcwd(),"rawiris.csv"),"r")
+f=open(os.path.join(os.getcwd(),"rawiris.csv"),"r")
+baseName=os.path.basename(f.name)
+commandString="python csvToarff.py "+baseName
+print commandString
+os.system(commandString)
+
+f=open(os.path.join(os.getcwd(),"rawiris.arff"),"r")
+
+
 
 outputFolder=os.path.join(os.getcwd(),"FeatureSelected")
 scriptPath=os.path.join(os.getcwd(),"RankFeature.sh")

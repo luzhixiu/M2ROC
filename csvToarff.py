@@ -1,7 +1,10 @@
 import os
 from sets import Set
 from pydoc import classname
-path=os.path.join(os.getcwd(),"rawiris.csv")
+import sysconfig
+import sys
+
+path=os.path.join(os.getcwd(),sys.argv[1])
 f=open(path,"r")
 lines=f.readlines()
 f.close()
