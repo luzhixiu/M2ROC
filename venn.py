@@ -21,12 +21,15 @@ default_colors = [
 ]
 
 def draw_ellipse(fig, ax, x, y, w, h, a, fillcolor):
+    print fillcolor
     e = patches.Ellipse(
         xy=(x, y),
         width=w,
         height=h,
         angle=a,
-        color=fillcolor)
+        facecolor=fillcolor,
+        edgecolor=[0,0,0,0.5]
+        )
     ax.add_patch(e)
 
 def draw_triangle(fig, ax, x1, y1, x2, y2, x3, y3, fillcolor):
@@ -290,9 +293,10 @@ def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     return
       pyplot Figure and AxesSubplot object
     """
+    
     colors = options.get('colors', [default_colors[i] for i in range(5)])
     figsize = options.get('figsize', (13, 13))
-    dpi = options.get('dpi', 96)
+    dpi = options.get('dpi', 128)
     
     fig = plt.figure(0, figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, aspect='equal')
@@ -301,6 +305,7 @@ def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     ax.set_xlim(left=0.0, right=1.0)
     
     # body   
+
     draw_ellipse(fig, ax, 0.428, 0.449, 0.87, 0.50, 155.0, colors[0])
     draw_ellipse(fig, ax, 0.469, 0.543, 0.87, 0.50, 82.0, colors[1])
     draw_ellipse(fig, ax, 0.558, 0.523, 0.87, 0.50, 10.0, colors[2])
@@ -344,7 +349,7 @@ def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     draw_text(fig, ax, 0.97, 0.74, names[2], colors[2])
     draw_text(fig, ax, 0.88, 0.05, names[3], colors[3])
     draw_text(fig, ax, 0.12, 0.05, names[4], colors[4])
-    leg = ax.legend(names, loc='best', fancybox=True)
+    leg = ax.legend(names, loc="upper left", fancybox=True)
     leg.get_frame().set_alpha(0.5)
     
     return fig, ax
