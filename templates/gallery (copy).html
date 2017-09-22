@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+        <h1 class="page-header">    Your ROC Results</h1>
+        
+        <font size="3">Below are your ROC resutls, you can also download all the output files using this link:</font>
+        <a href="{{url_for('get_zip')}}">Download</a>
+
+	<img id="roc" alt="Roc Result" src="{{url_for('send_ROC')}}" width:304px;height:228px;">
+
+
+
+         
+        
+       
+</body>

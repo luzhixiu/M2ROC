@@ -18,7 +18,7 @@ def concatenate(path):
 
 
 
-rawpath=os.path.join(os.getcwd(),"rawiris.csv")
+rawpath=os.path.join(os.getcwd(),"raw.csv")
 rawList=concatenate(rawpath)
 listToIndex=dict()
 for i in range(len(rawList)):

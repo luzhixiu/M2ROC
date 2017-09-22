@@ -11,6 +11,7 @@ import numpy as np
 from numpy import*
 import copy
 import matplotlib.pyplot as plt
+plt.switch_backend('agg')
 from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.cross_validation import StratifiedKFold
@@ -22,18 +23,58 @@ import os
 from sklearn.utils import shuffle
 from sklearn.model_selection import KFold
 from collections import defaultdict
+import configparser
+mpl.use('Agg') #turn off graphic display for the server
+#Config set up
 
-#preset some variables
-lw=1.5 #linewidth
-cls="SVM" #classifier
-title="Receiver operating characteristic example"
-showClassROC=False
-NumberOfEstimators=10 #this is only used for random forest
-addNoise=20
-inputFolder="/home/lu/eclipse-workspace/LabTool/FeatureSelected"
-# inputFolder="/home/lu/Desktop/ROCInput"
-topFeature=4
-legendSize=10
+settings = configparser.ConfigParser()
+settings._interpolation = configparser.ExtendedInterpolation()
+settings.read('config.txt')
+Classifier=settings.get('SectionOne','Classifier')
+if len(Classifier)!=0:
+    cls=Classifier
+
+N_estimator=settings.get('SectionOne','Number of Estimators')
+if len(N_estimator)!=0:
+    NumberOfEstimators=int(N_estimator)
+
+AverageRead=settings.get('SectionOne','Average the result')
+
+if 'Y' or 'y' in AverageRead:
+    showClassROC=False
+else:
+    showClassROC=True
+
+featureRange=int(settings.get('SectionOne','Plot feature range'))
+topFeature=featureRange-1
+print "TopFeature Chosen "+ str(topFeature)
+
+PlotLegendSize=float(settings.get('SectionOne','Plot lengend size'))
+legendSize=PlotLegendSize
+
+LineWidth=float(settings.get('SectionOne','Plot line width'))
+lw=LineWidth
+
+DataSetName=str(settings.get('SectionOne','DataSet type name'))
+
+NoiseLevel=int(settings.get('SectionOne','Noise Level'))
+addNoise=NoiseLevel
+
+
+
+
+# preset some variables
+# lw=1.5 #linewidth
+# cls="SVM" #classifier
+# title="Receiver operating characteristic example"
+# showClassROC=False
+# NumberOfEstimators=10 #this is only used for random forest
+# addNoise=0
+
+# topFeature=4
+# legendSize=10
+
+inputFolder=os.path.join(os.getcwd(),"FeatureSelected")
 
 #some local config 
 mpl.rcParams['axes.color_cycle'] = ['red','plum','steelblue','orange','yellow','green','cyan','blue','purple','black']
@@ -67,7 +108,6 @@ def NumberLabels():
                 splitList=line.split(",")
                 splitList[len(splitList)-1]= labelDict[splitList[len(splitList)-1]]
                 writeString=",".join(str(x) for x in splitList)
-                print writeString
                 f.write(writeString+"\n")
         
 
@@ -190,7 +230,6 @@ def processFile(f):
     fpr = dict()
     tpr = dict()
     roc_auc = dict()
-    plt.figure(1)
     fpr["micro"], tpr["micro"], _ = roc_curve(all_test.ravel(), all_probas.ravel())
     roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
     plt.plot(fpr["micro"], tpr["micro"],
@@ -252,6 +291,7 @@ for i in range(originTopFeature):
     topFeature=i+1
     aucList=processFolder(inputFolder)
     aucMatrix.append(aucList)
+    
     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
     plt.xlim([-0.05, 1.05])
     plt.ylim([-0.05, 1.05])
@@ -259,7 +299,10 @@ for i in range(originTopFeature):
     plt.ylabel('True Positive Rate')
     plt.title(title)
     plt.legend(loc="lower right")
+    plt.savefig("TOP_"+str(i+1)+"_Feature")
     plt.show()
+    plt.figure()
+
 NTL=defaultdict(list) # NTL is number to list
 for featureList in aucMatrix:#featureList represents features chosen
     for k in range(len(featureList)): #k is the number of file, featureList[k] is the auc value assosited with it
@@ -275,6 +318,7 @@ plt.xlabel('No. of Features')
 plt.ylabel('AUC')
 plt.title("AUC")
 plt.legend(loc="lower right",prop={'size':legendSize})     
+plt.savefig("AUC")
 plt.show()    
     
 

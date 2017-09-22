@@ -5,22 +5,18 @@
     
   </head>
   <body>
-     <script type="text/javascript" src="{{ url_for('static', filename='loadAuc.js') }}">
-    </script>
+
  
     <font size="5"> Below is Your AUC Result: </font> 
    <br>
-    <img id="auc" alt="Auc Result" src="{{ url_for('static', filename='auc.png') }}" width:304px;height:228px;">
+    <img id="auc" alt="Auc Result" src="{{url_for('send_AUC')}}" width:304px;height:228px;">
     
 
-    <form action = "http://52.15.44.99:80/auclistener " method = "POST"
+    <form action = "http://0.0.0.0:5000/aucListener " method = "POST"
     <br>
     Top Features Included:
     <input type="text" name="maxrange" id="maxrange"><br>
 
-    <br>
-    Interval For Features:
-    <input type="text" name="interval" id="interval" value=10><br>
     
     <br>Would you like to average your result?:<br>
     <input type="radio" name="avg" value="No" checked>Yes<br>
@@ -31,6 +27,7 @@
     <img id="loading" alt="loading" src="{{ url_for('static', filename='loading.gif') }}" style="display: none;"> 
    </form>
         
-
+     <script type="text/javascript" src="{{ url_for('static', filename='loadAuc.js') }}">
+    </script>
       
   </body>

@@ -9,9 +9,10 @@ import matplotlib.pyplot as plt
 import venn
 
 
-# fname=sys.argv[1]
-# topFeature=sys.argv[2]
-fname="rawiris.arff"
+userFolder=sys.argv[1]
+topFeature=sys.argv[2]
+os.chdir(os.path.join(os.getcwd(),userFolder))
+
 topFeature=3
 
 def getTopFeature(path):
@@ -23,10 +24,10 @@ def getTopFeature(path):
             myList.append(splitList[1])
     return myList[0:topFeature]
 
-fpath=os.path.join(os.getcwd(),fname)
+fpath=os.path.join(os.getcwd(),'raw.csv')
 getTopFeature(fpath)
 outputFolder=os.path.join(os.getcwd(),"FeatureSelected")
-command="./RankFeature.sh "+fname+" "+outputFolder
+command="../RankFeature.sh "+"raw.csv "+outputFolder
 print "command： "+command
 os.system(command)
 flist=os.listdir(outputFolder)

@@ -21,7 +21,6 @@ default_colors = [
 ]
 
 def draw_ellipse(fig, ax, x, y, w, h, a, fillcolor):
-    print fillcolor
     e = patches.Ellipse(
         xy=(x, y),
         width=w,

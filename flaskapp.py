@@ -12,8 +12,19 @@ from string import ascii_uppercase
 app = Flask(__name__)
 
 
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
+def getTopFeature():
+    settings = configparser.ConfigParser()
+    settings._interpolation = configparser.ExtendedInterpolation()
+    userFolder=os.path.join(os.getcwd(),session["username"])
+    configFile=os.path.join(userFolder,"config.txt")
+    settings.read(configFile)
+    topFeature=settings.get('SectionOne','plot feature range')
+    return topFeature
+
 def getRandomString():
-    return 'User '+''.join(choice(ascii_uppercase) for i in range(12))
+    return ''.join(choice(ascii_uppercase) for i in range(12))
 
 
 
@@ -39,8 +50,126 @@ def add_header(r):
 @app.route('/')
 def start():
     randomString=getRandomString()
-    session["username"]=randomString
+    if "username" not in session:
+        session["username"]=randomString
+    if not os.path.exists(os.path.join(os.getcwd(),session["username"])): #create default folder
+        os.mkdir(os.path.join(os.getcwd(),session["username"]))
+        
+    if not os.path.exists(os.path.join(os.getcwd(),session["username"],"config.txt")): #create default config file
+        os.system("cp config.txt "+ os.path.join(os.getcwd(),session["username"]))
+    
+    command="cp rawiris.csv "+ os.path.join(os.getcwd(),session["username"],"raw.csv")
+    print command
     return render_template('form.html')
+
+@app.route('/result',methods = ['POST', 'GET'])
+def result():
+    if request.method == 'POST':       
+        f=request.files['file']                
+        if f.filename=="":
+            command="cp rawiris.csv "+ os.path.join(os.getcwd(),session["username"],"raw.csv")
+            print command
+            os.system(command)
+        else: 
+            workdir=os.path.join(os.getcwd(),session["username"],"raw.csv")
+            f.save(workdir)
+        classifier = request.form['classifier']
+        estimators=request.form['estimators']
+        legendsize=request.form['legendsize']
+        plotlinewidth=request.form['plotlinewidth']
+        legendtitle=request.form['legendtitle']   
+        settings = configparser.ConfigParser()
+        settings._interpolation = configparser.ExtendedInterpolation()
+        userFolder=os.path.join(os.getcwd(),session["username"])
+        configFile=os.path.join(userFolder,"config.txt")
+        print configFile
+        settings.read(configFile)
+        settings.set('SectionOne', 'Classifier', str(classifier))   
+        settings.set('SectionOne', 'Number of estimators', str(estimators))
+        settings.set('SectionOne', 'Plot lengend size', str(legendsize)) 
+        settings.set('SectionOne', 'Plot line width', str(plotlinewidth)) 
+        settings.set('SectionOne', 'Dataset type name', str(legendtitle))        
+        configPath=os.path.join(os.getcwd(),session["username"],"config.txt")
+         
+        with open(configPath, 'wb') as configfile:
+            settings.write(configfile)               
+        call(["python", "main.py",session["username"]])
+        print "end of result fuction"        
+        return redirect(url_for('get_auc'))
+    
+@app.route('/auclistener',methods = ['POST', 'GET'])
+
+@app.route('/auc',methods=['Post','GET'])
+def get_auc():
+    return render_template('auc.html')
+
+@app.route('/AUC',methods=['Post','GET'])
+def send_AUC():
+    print os.path.join(os.getcwd(),session["username"])
+    return send_from_directory(os.path.join(os.getcwd(),session["username"]),"AUC.png" )
+@app.route('/aucListener',methods=['Post','GET'])
+def auclistener():
+    if request.method == 'POST':
+        maxFeature=request.form['maxrange']
+        avg=request.form['avg']
+        configPath=os.path.join(os.getcwd(),session["username"],"config.txt")
+        settings = configparser.ConfigParser()
+        settings._interpolation = configparser.ExtendedInterpolation()
+        settings.read(configPath)
+        settings.set('SectionOne', 'average the result', str(avg)) 
+        settings.set('SectionOne','plot feature range',str(maxFeature) )
+         
+        with open(configPath, 'wb') as configfile:
+            settings.write(configfile)
+        
+        return redirect(url_for("page3"))
+
+@app.route('/page3',methods=['Post','GET'])
+def page3():
+    return render_template("page3.html")
+    
+
+@app.route('/getROC')
+def get_ROC():
+        topFeature=getTopFeature()
+        rocFileName="TOP_%s_Feature.png"%topFeature
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),session["username"]),rocFileName)
+    
+
+@app.route('/gallery')
+def get_gallery():
+    static_names = os.listdir('./static')
+    imgList=[]
+    for name in static_names:
+        if hasNumbers(name):
+            imgList.append(name)
+    
+    return render_template("gallery.html", image_names=sorted(imgList,cmp=sortByNumber))
+
+
+
+@app.route('/get_zip')
+def get_zip():
+    userFolder=session["username"]
+    command="zip -r "+userFolder+"/result.zip "+userFolder
+    os.system(command)
+    
+    return send_file(userFolder+"/result.zip",mimetype='application/zip')        
+
+@app.route('/venn')
+def venn():
+    command="python drawVenn2.py "+session["username"]+" "+getTopFeature()
+    os.system(command)
+    return render_template("venn.html")
+    
+@app.route('/get_Venn')
+def get_Venn():
+    return send_from_directory(os.path.join(os.getcwd(),session["username"]),"venn5.png" )
+
+
+
+
 
 @app.route('/user')
 def user():
@@ -50,13 +179,6 @@ def user():
 
 
 
-
-
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
-    os.chdir("/home/ubuntu/LabTool1") 
-
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
     app.config['DEBUG'] = True    

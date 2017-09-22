@@ -4,7 +4,9 @@ from pydoc import classname
 import sysconfig
 import sys
 
-path=os.path.join(os.getcwd(),sys.argv[1])
+
+userFolder=sys.argv[2]
+path=os.path.join(os.getcwd(),userFolder, sys.argv[1])
 f=open(path,"r")
 lines=f.readlines()
 f.close()
@@ -36,7 +38,7 @@ AttributeClass+="}"
 arffStringList.append(AttributeClass)
 arffStringList.append("@DATA")
 
-writePath=os.path.join(os.getcwd(),fileName+".arff")
+writePath=os.path.join(os.getcwd(),userFolder,fileName+".arff")
 print writePath
 f=open(writePath,"w")
 for s in arffStringList:
