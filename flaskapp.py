@@ -121,7 +121,7 @@ def auclistener():
          
         with open(configPath, 'wb') as configfile:
             settings.write(configfile)
-        
+        call(["python", "main.py",session["username"]])
         return redirect(url_for("page3"))
 
 @app.route('/page3',methods=['Post','GET'])

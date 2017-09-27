@@ -8,12 +8,12 @@ import math
 
 default_colors = [
     # r, g, b, a
-    [255, 255, 0, 0.5],
-    [255, 0, 0, 0.5],
-    [51, 153, 255, 0.6],
-    [0, 153, 0, 0.4],
+    [244, 236, 66, 0.9],
+    [255, 0, 0, 0.3],
+    [51, 153, 255, 0.3],
+    [0, 153, 0, 0.3],
     [153, 51, 255, 0.3],
-    [102, 102, 153, 0.2],
+    [102, 102, 153, 0.3],
 ]
 default_colors = [
     [i[0] / 255.0, i[1] / 255.0, i[2] / 255.0, i[3]]
@@ -48,8 +48,9 @@ def draw_text(fig, ax, x, y, text, color=[0, 0, 0, 1]):
         x, y, text,
         horizontalalignment='center',
         verticalalignment='center',
-        fontsize=14,
-        color=color)
+        fontsize=13,
+        color=color
+        )
     
 def draw_annotate(fig, ax, x, y, textx, texty, text, color=[0, 0, 0, 1], arrowcolor=[0, 0, 0, 0.3]):
     plt.annotate(

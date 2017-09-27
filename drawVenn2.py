@@ -10,10 +10,10 @@ import venn
 
 
 userFolder=sys.argv[1]
-topFeature=sys.argv[2]
+topFeature=int(sys.argv[2])
 os.chdir(os.path.join(os.getcwd(),userFolder))
 
-topFeature=3
+# topFeature=3
 
 def getTopFeature(path):
     f=open(path,"r")
@@ -24,10 +24,10 @@ def getTopFeature(path):
             myList.append(splitList[1])
     return myList[0:topFeature]
 
-fpath=os.path.join(os.getcwd(),'raw.csv')
+fpath=os.path.join(os.getcwd(),'raw.arff')
 getTopFeature(fpath)
 outputFolder=os.path.join(os.getcwd(),"FeatureSelected")
-command="../RankFeature.sh "+"raw.csv "+outputFolder
+command="../RankFeature.sh "+"raw.arff "+outputFolder
 print "command： "+command
 os.system(command)
 flist=os.listdir(outputFolder)
@@ -41,11 +41,34 @@ for f in flist:
     sets.append(set)
     label=os.path.basename(f).split(".")[0]
     labels.append(label)
-    
+
+print sets
+  
 vennLabel=venn.get_labels(sets,fill=['number','logic'])
 vennLabel=venn.get_labels(sets,fill=['number'])
+# labels.sort(reverse=True)
+print vennLabel
+
+inv_map = {}
+for k, v in vennLabel.iteritems():
+    inv_map[v] = inv_map.get(v, [])
+    inv_map[v].append(k)
+
 fig, ax = venn.venn5(vennLabel, names=labels)
 fig.savefig('venn5.png', bbox_inches='tight')
+vennList=list()
+keyList=list()
+for key in inv_map.iterkeys():
+    keyList.append(key)
+keyList.sort()
+for key in keyList:
+    if '0' in key:
+        continue
+    print "Selected by %s Methods"%key
+    for i in inv_map[key]:
+        print i
+    
+
 
 plt.close()
 

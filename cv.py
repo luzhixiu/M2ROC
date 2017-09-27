@@ -42,11 +42,12 @@ AverageRead=settings.get('SectionOne','Average the result')
 
 if 'Y' or 'y' in AverageRead:
     showClassROC=False
-else:
+if 'N' or 'n' in AverageRead:
+    print "show is set to true"
     showClassROC=True
 
 featureRange=int(settings.get('SectionOne','Plot feature range'))
-topFeature=featureRange-1
+topFeature=featureRange
 print "TopFeature Chosen "+ str(topFeature)
 
 PlotLegendSize=float(settings.get('SectionOne','Plot lengend size'))
@@ -59,8 +60,6 @@ DataSetName=str(settings.get('SectionOne','DataSet type name'))
 
 NoiseLevel=int(settings.get('SectionOne','Noise Level'))
 addNoise=NoiseLevel
-
-
 
 
 # preset some variables
@@ -142,6 +141,7 @@ def process(X,y,classN):
 
     roc_auc_class_micro = auc(class_fpr_micro,class_tpr_micro)
     if showClassROC:
+        print "Not gonna Average the result"
         plt.plot(class_fpr_micro, class_tpr_micro,label='Class  micro-average ROC curve (area = {0:0.2f})'''.format(roc_auc_class_micro ),linewidth=lw)
     
 def loadClassifier(cls):
@@ -203,7 +203,6 @@ def processFile(f):
     if addNoise>0:
         X = np.c_[X, random_state.randn(n_samples, addNoise * n_features)]
     data=copy.copy(X)
-    print data.shape
     label=copy.copy(y)
     #get the number of classes
     n_classes=np.unique(label)
@@ -278,7 +277,7 @@ X=0
 y=0
 NumberLabels()
 
-originTopFeature=loadMaxFeature()
+originTopFeature=topFeature
 aucMatrix=[]
 indexToFname=dict()
 
