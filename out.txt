@@ -1,0 +1,7 @@
+command： ../RankFeature.sh raw.arff /home/lu/eclipse-workspace/LabTool/NBMBSVCFUFAK/FeatureSelected
+OneVsRest  ['27', '19', '57', '70', '51', '50', '75', '65', '6', '82']
+InformationGain & GainRatio & SymmetricUncertain  ['25', '26', '27', '32', '30', '28', '29', '1', '2', '4']
+Relief  ['1', '27', '14', '48', '19', '54', '77', '2', '4', '84']
+InformationGain & GainRatio & SymmetricUncertain & Relief  ['1', '2', '27', '4']
+InformationGain & OneVsRest & GainRatio & SymmetricUncertain & Relief  ['27']
+OneVsRest & Relief  ['19', '27']

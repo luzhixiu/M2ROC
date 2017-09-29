@@ -8,7 +8,7 @@ import math
 
 default_colors = [
     # r, g, b, a
-    [244, 236, 66, 0.9],
+    [255, 153, 51, 0.7],
     [255, 0, 0, 0.3],
     [51, 153, 255, 0.3],
     [0, 153, 0, 0.3],
@@ -303,6 +303,7 @@ def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     ax.set_axis_off()
     ax.set_ylim(bottom=0.0, top=1.0)
     ax.set_xlim(left=0.0, right=1.0)
+
     
     # body   
 

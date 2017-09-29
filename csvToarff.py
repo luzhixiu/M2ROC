@@ -4,9 +4,8 @@ from pydoc import classname
 import sysconfig
 import sys
 
-
-userFolder=sys.argv[2]
 path=os.path.join(os.getcwd(),userFolder, sys.argv[1])
+userFolder=sys.argv[2]
 f=open(path,"r")
 lines=f.readlines()
 f.close()
