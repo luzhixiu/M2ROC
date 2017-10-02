@@ -23,6 +23,14 @@ orig_stdout = sys.stdout
 
 # topFeature=3
 
+def calculateAuc(mylist):
+    
+
+
+
+
+
+
 def getTopFeature(path):
     f=open(path,"r")
     myList=[]
@@ -72,17 +80,37 @@ for f in flist:
 
 #number of features wont go past thousands, gonna use n^2 
 print sets
+methodCnt=[]
+FiveList=[]
+FourList=[]
+ThreeList=[]
+TwoList=[]
+OneList=[]
 for n in range(1,maxFeature+1):
     cnt=0;
 #     print n
+    
     for ls in sets: ##came up with some bad variable names, sets is a list of list of features selected by different methods
         if ls.count(str(n))>0:
             cnt+=1
+    methodCnt.append(cnt)
     print "Feature %d is selected by %d methods"%(n,cnt)
-
-
-             
+    
+    
+for i in range(len(methodCnt)):
+    if methodCnt[i]>=5:
+        FiveList.append(i+1)
+    if methodCnt[i]>=4:
+        FourList.append(i+1)
+            
+    if methodCnt[i]>=3:
+        ThreeList.append(i+1)
+    if methodCnt[i]>=2:
+        TwoList.append(i+1)         
+    if methodCnt[i]>=5:
+        OneList.append(i+1)
   
+            
 vennLabel=venn.get_labels(sets,fill=['number','logic'])
 vennLabel=venn.get_labels(sets,fill=['number'])
 
