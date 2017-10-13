@@ -1,8 +1,8 @@
 [SectionOne]
 classifier = SVM
 number of estimators = 10
-average the result = No
-plot feature range = 3
+average the result = Yes
+plot feature range = 10
 plot lengend size = 7.5
 plot line width = 2
 dataset type name = Sample

@@ -1,11 +1,16 @@
+# -*- coding: utf-8 -*-
 import os
 from sets import Set
 from pydoc import classname
 import sysconfig
 import sys
-
-path=os.path.join(os.getcwd(),userFolder, sys.argv[1])
+from matplotlib.font_manager import path
 userFolder=sys.argv[2]
+path=os.path.join(os.getcwd(),userFolder, sys.argv[1])
+
+print "file path is %s"%path
+print "user folder is %s"%userFolder
+
 f=open(path,"r")
 lines=f.readlines()
 f.close()
@@ -29,11 +34,13 @@ for line in lines:
 AttributeClass="@ATTRIBUTE class {"
 for i in classList:  
     if '\n' in i:
-        i=i[:len(i)-1]
+        i=i[:len(i)-2]
     AttributeClass+=i    
     AttributeClass+=","
 AttributeClass=AttributeClass[0:len(AttributeClass)-1]
 AttributeClass+="}"
+
+
 arffStringList.append(AttributeClass)
 arffStringList.append("@DATA")
 

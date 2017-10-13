@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 import matplotlib.pyplot as plt
  
@@ -30,11 +31,15 @@ for i in range(n_groups):
 plt.xlabel('')
 plt.ylabel('AUC')
 
+plt.ylim([0.0, 1.19])
 from matplotlib.font_manager import FontProperties
 
-fontP = FontProperties()
-fontP.set_size('small')
-plt.legend(loc='topleft')
+
+plt.legend(loc="upper right",prop={'size':8})     
+
 
 # plt.tight_layout()
-plt.show()
+def showPlot():
+    plt.show()
+    
+showPlot()
