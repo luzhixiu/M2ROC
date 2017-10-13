@@ -107,6 +107,7 @@ def get_auc():
 def send_AUC():
     print os.path.join(os.getcwd(),session["username"])
     return send_from_directory(os.path.join(os.getcwd(),session["username"]),"AUC.png" )
+
 @app.route('/aucListener',methods=['Post','GET'])
 def auclistener():
     if request.method == 'POST':
@@ -159,13 +160,22 @@ def get_zip():
 
 @app.route('/venn')
 def venn():
-    command="python drawVenn2.py "+session["username"]+" "+getTopFeature()
+    command="python drawVenn.py "+session["username"]+" "+getTopFeature()
     os.system(command)
     return render_template("venn.html")
     
 @app.route('/get_Venn')
 def get_Venn():
     return send_from_directory(os.path.join(os.getcwd(),session["username"]),"venn5.png" )
+
+
+
+
+
+@app.route('/get_Bar')
+def get_Bar():
+    return send_from_directory(os.path.join(os.getcwd(),session["username"]),"bar.png" )
+
 
 
 

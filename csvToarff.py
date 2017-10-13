@@ -34,7 +34,7 @@ for line in lines:
 AttributeClass="@ATTRIBUTE class {"
 for i in classList:  
     if '\n' in i:
-        i=i[:len(i)-2]
+        i=i[:len(i)-1]
     AttributeClass+=i    
     AttributeClass+=","
 AttributeClass=AttributeClass[0:len(AttributeClass)-1]

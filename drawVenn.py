@@ -14,7 +14,8 @@ from sklearn.model_selection import KFold
 import matplotlib.pyplot as plt
 import venn
 from sklearn.metrics import roc_curve, auc
-
+plt.switch_backend('agg')
+mpl.use('Agg') 
 showClassROC=False
 lw=2
 
@@ -49,23 +50,39 @@ folds=15
 
 
 
-# userFolder=sys.argv[1]
-# topFeature=int(sys.argv[2])
+userFolder=sys.argv[1]
+topFeature=int(sys.argv[2])
 
-userFolder="NBMBSVCFUFAK"
-topFeature=180
 
 
 os.chdir(os.path.join(os.getcwd(),userFolder))
 
 outputFile = open(os.path.join(os.getcwd(),"venn.txt"), 'w')
 orig_stdout = sys.stdout
-
-# sys.stdout=outputFile
-
+sys.stdout=outputFile
 
 
+def numberLables():
+    path=os.path.join(os.getcwd(),"raw.csv")
+    labelDict=dict()
+    with open(path,"r") as f:
+        lines=f.readlines()
+        labelSet=set()
+        for line in lines:
+            splitList=line.split(",")
+            labelSet.add(splitList[len(splitList)-1])
+            i=0   
+        for item in labelSet:
+            labelDict[item]=i
+            i+=1
 
+        with open(path,"w") as f:
+            for line in lines:
+                splitList=line.split(",")
+                splitList[len(splitList)-1]= labelDict[splitList[len(splitList)-1]]
+                writeString=",".join(str(x) for x in splitList)
+                f.write(writeString+"\n")
+numberLables()
 
 
 
@@ -172,16 +189,14 @@ def getMaxFeature(path):
 #take in a list of lists,each list contain class and average auc for each Set(Union, at least 2,3,4,5) 
 def drawBar(Matrix):
     Matrix=map(list, zip(*Matrix))
-    print Matrix
     # data to plot
-    n_groups = 5
+    n_groups = 6
     means_frank = (90, 55, 40, 65)
     means_guido = (85, 62, 54, 20)
      
     # create plot
     fig, ax = plt.subplots()
     index = np.arange(n_groups)
-    print index
     bar_width = 0.15
     opacity = 0.8
      
@@ -201,17 +216,16 @@ def drawBar(Matrix):
         plt.bar(index+gap,ls,bar_width,alpha=opacity,label=label[idx])
         gap+=bar_width
         idx+=1
-   
-    
-     
-    plt.xlabel('Person')
-    plt.ylabel('Scores')
+
+    plt.xlabel('Class')
+    plt.ylabel('AUC')
     plt.title('')
     plt.xticks(index + bar_width, ('Class 0', 'Class 1', 'Class 2', 'Class 3',"MicroAverage"))
     plt.legend(loc="upper right",prop={'size':8})
     plt.yticks([0,0.2,0.4,0.6,0.8,1.0])
     plt.ylim([0.0, 1.39])
     plt.tight_layout()
+    plt.savefig("bar.png");
     plt.show()  
     
     
@@ -251,7 +265,7 @@ for n in range(1,maxFeature+1):
         if ls.count(str(n))>0:
             cnt+=1
     methodCnt.append(cnt)
-#     print "Feature %d is selected by %d methods"%(n,cnt)
+    print "Feature %d is selected by %d methods"%(n,cnt)
     
 #     
 for i in range(len(methodCnt)):
@@ -287,8 +301,6 @@ aucMatrix.append(aucList)
 aucList=[]
 loadTopFeature(FiveList)
 aucMatrix.append(aucList)
-print "==="
-print aucMatrix[4]
 drawBar(aucMatrix)
 
 
@@ -328,9 +340,9 @@ for key in reversed(range(1,topFeature+1)):
             
                     positiveFeatureList.append(sets[i])#find the digits with one and the set it concludes 
             outputString=outputString[:len(outputString)-2]   
-#             print outputString,           
+            print outputString,           
             interception=findIntercetion(positiveFeatureList)
-#             print str(list(interception))
+            print str(list(interception))
             
             
             
