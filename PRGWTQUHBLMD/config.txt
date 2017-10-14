@@ -1,0 +1,9 @@
+[SectionOne]
+classifier=SVM
+number of estimators = 20                
+Average the result = Yes           
+plot feature range = 10
+plot lengend size = 7.5
+plot line width = 2
+dataSet type name : Unbalanced 15
+noise level: 0

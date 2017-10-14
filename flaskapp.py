@@ -17,7 +17,7 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 def getTopFeature():
     settings = configparser.ConfigParser()
     settings._interpolation = configparser.ExtendedInterpolation()
-    userFolder=os.path.join(os.getcwd(),session["username"])
+    userFolder=os.path.join(os.getcwd(),"userFolder",session["username"])
     configFile=os.path.join(userFolder,"config.txt")
     settings.read(configFile)
     topFeature=settings.get('SectionOne','plot feature range')
@@ -49,16 +49,17 @@ def add_header(r):
 
 @app.route('/')
 def start():
+    print "started"
     randomString=getRandomString()
     if "username" not in session:
         session["username"]=randomString
-    if not os.path.exists(os.path.join(os.getcwd(),session["username"])): #create default folder
-        os.mkdir(os.path.join(os.getcwd(),session["username"]))
+    if not os.path.exists(os.path.join(os.getcwd(),"userFolder",session["username"])): #create default folder
+        os.mkdir(os.path.join(os.getcwd(),"userFolder",session["username"]))
         
-    if not os.path.exists(os.path.join(os.getcwd(),session["username"],"config.txt")): #create default config file
-        os.system("cp config.txt "+ os.path.join(os.getcwd(),session["username"]))
+    if not os.path.exists(os.path.join(os.getcwd(),"userFolder",session["username"],"config.txt")): #create default config file
+        os.system("cp config.txt "+ os.path.join(os.getcwd(),"userFolder",session["username"]))
     
-    command="cp rawiris.csv "+ os.path.join(os.getcwd(),session["username"],"raw.csv")
+    command="cp rawiris.csv "+ os.path.join(os.getcwd(),"userFolder",session["username"],"raw.csv")
     print command
     return render_template('form.html')
 
@@ -67,11 +68,11 @@ def result():
     if request.method == 'POST':       
         f=request.files['file']                
         if f.filename=="":
-            command="cp rawiris.csv "+ os.path.join(os.getcwd(),session["username"],"raw.csv")
+            command="cp rawiris.csv "+ os.path.join(os.getcwd(),"userFolder",session["username"],"raw.csv")
             print command
             os.system(command)
         else: 
-            workdir=os.path.join(os.getcwd(),session["username"],"raw.csv")
+            workdir=os.path.join(os.getcwd(),"userFolder",session["username"],"raw.csv")
             f.save(workdir)
         classifier = request.form['classifier']
         estimators=request.form['estimators']
@@ -80,7 +81,7 @@ def result():
         legendtitle=request.form['legendtitle']   
         settings = configparser.ConfigParser()
         settings._interpolation = configparser.ExtendedInterpolation()
-        userFolder=os.path.join(os.getcwd(),session["username"])
+        userFolder=os.path.join(os.getcwd(),"userFolder",session["username"])
         configFile=os.path.join(userFolder,"config.txt")
         print configFile
         settings.read(configFile)
@@ -89,7 +90,7 @@ def result():
         settings.set('SectionOne', 'Plot lengend size', str(legendsize)) 
         settings.set('SectionOne', 'Plot line width', str(plotlinewidth)) 
         settings.set('SectionOne', 'Dataset type name', str(legendtitle))        
-        configPath=os.path.join(os.getcwd(),session["username"],"config.txt")
+        configPath=os.path.join(os.getcwd(),"userFolder",session["username"],"config.txt")
          
         with open(configPath, 'wb') as configfile:
             settings.write(configfile)               
@@ -105,15 +106,14 @@ def get_auc():
 
 @app.route('/AUC',methods=['Post','GET'])
 def send_AUC():
-    print os.path.join(os.getcwd(),session["username"])
-    return send_from_directory(os.path.join(os.getcwd(),session["username"]),"AUC.png" )
+    return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),"AUC.png" )
 
 @app.route('/aucListener',methods=['Post','GET'])
 def auclistener():
     if request.method == 'POST':
         maxFeature=request.form['maxrange']
         avg=request.form['avg']
-        configPath=os.path.join(os.getcwd(),session["username"],"config.txt")
+        configPath=os.path.join(os.getcwd(),"userFolder",session["username"],"config.txt")
         settings = configparser.ConfigParser()
         settings._interpolation = configparser.ExtendedInterpolation()
         settings.read(configPath)
@@ -135,7 +135,7 @@ def get_ROC():
         topFeature=getTopFeature()
         rocFileName="TOP_%s_Feature.png"%topFeature
         print rocFileName
-        return send_from_directory(os.path.join(os.getcwd(),session["username"]),rocFileName)
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
     
 
 @app.route('/gallery')
@@ -152,7 +152,7 @@ def get_gallery():
 
 @app.route('/get_zip')
 def get_zip():
-    userFolder=session["username"]
+    userFolder="userFolder/"+session["username"]
     command="zip -r "+userFolder+"/result.zip "+userFolder
     os.system(command)
     
@@ -166,7 +166,7 @@ def venn():
     
 @app.route('/get_Venn')
 def get_Venn():
-    return send_from_directory(os.path.join(os.getcwd(),session["username"]),"venn5.png" )
+    return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),"venn5.png" )
 
 
 
@@ -174,7 +174,7 @@ def get_Venn():
 
 @app.route('/get_Bar')
 def get_Bar():
-    return send_from_directory(os.path.join(os.getcwd(),session["username"]),"bar.png" )
+    return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),"bar.png" )
 
 
 
