@@ -6,7 +6,7 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='loadFile.js') }}">
     </script>
-<form action = "http://52.15.44.99:80/result " method = "POST" 
+<form action = "http://0.0.0.0:5000/result " method = "POST" 
     enctype="multipart/form-data">
     <fieldset>
     <legend>Plot Config:</legend>
@@ -26,21 +26,24 @@
    	
 	 
     <br>
-    <br>Classifer type:<br>
+    <br>Classifer Type:<br>
     <input type="radio" name="classifier" value="SVM" checked>Support Vector Machine<br>
     <input type="radio" name="classifier" value="NB">Naive Bayes<br>
     <input type="radio" name="classifier" value="RF">Random Forest<br>
 
-    <br>Number of estimators (if you chose Random Forest as your classifier):<br>
+    <br>Number of Estimators (if you chose Random Forest as your classifier):<br>
     <input type="text" name="estimators" value="10"><br>		
-	   
-    <br>Plot lengend size:<br>
+
+    <br>Number of Folds: <br> "Folder Number must be larger than two"
+    <input type="text" name="fold" value="10"><br>	
+
+    <br>Plot Lengend Size:<br>
     <input type="text" name="legendsize" value=7.5><br>    
     	  		
-    <br>Plot line width:<br>
+    <br>Plot Line Width:<br>
     <input type="text" name="plotlinewidth" value=2><br> 
 
-    <br>Legend title:<br>
+    <br>Legend Title:<br>
     <input type="text" name="legendtitle" value="Sample"> <br>
 
 <br><br>	

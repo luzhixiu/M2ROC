@@ -12,15 +12,16 @@
     <img id="auc" alt="Auc Result" src="{{url_for('send_AUC')}}" width:304px;height:228px;">
     
 
-    <form action = "http://52.15.44.99:80/aucListener " method = "POST"
+    <form action = "http://0.0.0.0:5000/aucListener " method = "POST"
     <br>
     Top Features Included:
     <input type="text" name="maxrange" id="maxrange"><br>
 
     
     <br>Would you like to average your result?:<br>
-    <input type="radio" name="avg" value="No" checked>No<br>
-    <input type="radio" name="avg" value="Yes">Yes<br> 
+    <input type="radio" name="avg" value="Yes" checked>Yes<br> 
+    <input type="radio" name="avg" value="No" >No<br>
+
 
     <input type="reset">
     <input type="submit" id="submit" value="Submit"> 

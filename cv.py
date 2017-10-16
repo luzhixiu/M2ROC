@@ -30,15 +30,27 @@ title="ROC"
 settings = configparser.ConfigParser()
 settings._interpolation = configparser.ExtendedInterpolation()
 settings.read('config.txt')
-Classifier=settings.get('SectionOne','Classifier')
+Classifier=settings.get('SectionOne','classifier')
 if len(Classifier)!=0:
     cls=Classifier
 
-N_estimator=settings.get('SectionOne','Number of Estimators')
+N_estimator=settings.get('SectionOne','number of estimators')
 if len(N_estimator)!=0:
     NumberOfEstimators=int(N_estimator)
 
-AverageRead=settings.get('SectionOne','Average the result')
+fold=3
+fold_setting=settings.get('SectionOne','fold')
+if len(fold_setting)!=0:
+    fold=int(fold_setting)
+else:
+    print "Error EMPTY FOLD"
+
+if len(N_estimator)!=0:
+    NumberOfEstimators=int(N_estimator)
+
+
+
+AverageRead=settings.get('SectionOne','average the result')
 print AverageRead
 
 if AverageRead.find("e")>0:
@@ -47,19 +59,21 @@ if AverageRead.find("o")>0:
     print "show is set to true"
     showClassROC=True
 
-featureRange=int(settings.get('SectionOne','Plot feature range'))
-topFeature=featureRange
+
+
+chosenFeature=int(settings.get('SectionOne','top feature'))
+topFeature=chosenFeature
 print "TopFeature Chosen "+ str(topFeature)
 
-PlotLegendSize=float(settings.get('SectionOne','Plot lengend size'))
+PlotLegendSize=float(settings.get('SectionOne','plot lengend size'))
 legendSize=PlotLegendSize
 
 LineWidth=float(settings.get('SectionOne','Plot line width'))
 lw=LineWidth
 
-DataSetName=str(settings.get('SectionOne','DataSet type name'))
+DataSetName=str(settings.get('SectionOne','dataSet type name'))
 
-NoiseLevel=int(settings.get('SectionOne','Noise Level'))
+NoiseLevel=int(settings.get('SectionOne','noise Level'))
 addNoise=NoiseLevel
 
 
@@ -73,7 +87,7 @@ addNoise=NoiseLevel
 
 # topFeature=4
 # legendSize=10
-folds=15
+
 inputFolder=os.path.join(os.getcwd(),"FeatureSelected")
 
 #some local config 
@@ -126,14 +140,13 @@ def loadMaxFeature():
 def process(X,y,classN):
 #     print "process class %d"%(classN)
     global classifier
-    cv = KFold(n_splits=folds)
+    cv = KFold(n_splits=fold)
     global all_test,all_probas
     class_test=class_probas=np.array([])
     for train, test in cv.split(X):
         class_test=np.append(class_test,y[test])
         all_test=np.append(all_test,y[test])
 #         print X[train]
-        print y[train].shape
         probas_ = classifier.fit(X[train], y[train]).predict_proba(X[test])
         class_probas=np.append(class_probas,probas_[:, 1])
         all_probas=np.append(all_probas,probas_[:, 1])

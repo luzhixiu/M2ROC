@@ -14,10 +14,15 @@ from sklearn.model_selection import KFold
 import matplotlib.pyplot as plt
 import venn
 from sklearn.metrics import roc_curve, auc
+
 plt.switch_backend('agg')
 mpl.use('Agg') 
 showClassROC=False
 lw=2
+vennTxt=""
+
+
+    
 
 
 
@@ -47,6 +52,11 @@ loadClassifier(cls)
 
     
 folds=15
+fold_setting=settings.get('SectionOne','top feature')
+if len(fold_setting)!=0:
+    folds=int(fold_setting)
+else:
+    print "Error EMPTY FOLD"
 
 
 
@@ -57,9 +67,23 @@ topFeature=int(sys.argv[2])
 
 os.chdir(os.path.join(os.getcwd(),userFolder))
 
-outputFile = open(os.path.join(os.getcwd(),"venn.txt"), 'w')
-orig_stdout = sys.stdout
-sys.stdout=outputFile
+
+
+
+def getClassList():
+    path=os.path.join(os.getcwd(),"raw.arff")
+    
+    f=open(path)
+    lines=f.readlines()
+    for line in lines:
+        if "{" in line:
+            classList=line[line.find('{')+1:line.find('}')] 
+            classList=classList.split(",")
+            classList.append("MicroAverage")
+            return classList
+
+classList=getClassList()
+
 
 
 def numberLables():
@@ -149,7 +173,7 @@ def process(X,y,classN):
     class_fpr[classN],class_tpr[classN],_=roc_curve(class_test, class_probas)
 
     roc_auc_class_micro = auc(class_fpr_micro,class_tpr_micro)
-#     print "class %d average: %f" %(classN,roc_auc_class_micro)
+    global vennTxt
     aucList.append(roc_auc_class_micro)
     global showClassROC
 
@@ -188,27 +212,16 @@ def getMaxFeature(path):
 
 #take in a list of lists,each list contain class and average auc for each Set(Union, at least 2,3,4,5) 
 def drawBar(Matrix):
-    Matrix=map(list, zip(*Matrix))
+    print shape(Matrix)
+#     Matrix=map(list, zip(*Matrix)) #transpose the Matrix if I set the column and row wrong
+    print shape(Matrix)
     # data to plot
-    n_groups = 6
-    means_frank = (90, 55, 40, 65)
-    means_guido = (85, 62, 54, 20)
-     
+    n_groups = 4
     # create plot
     fig, ax = plt.subplots()
     index = np.arange(n_groups)
     bar_width = 0.15
     opacity = 0.8
-     
-#     plt.bar(index, Matrix[0], bar_width,
-#                      alpha=opacity,
-#                      color='b',
-#                      label='At Least 5')
-#      
-#     plt.bar(index + bar_width, Matrix[1], bar_width,
-#                      alpha=opacity,
-#                      color='g',
-#                      label='At Least 4')
     gap=0
     label=["Union","At Least 2","At Least 3","At Least 4","At Least 5"]
     idx=0
@@ -220,7 +233,8 @@ def drawBar(Matrix):
     plt.xlabel('Class')
     plt.ylabel('AUC')
     plt.title('')
-    plt.xticks(index + bar_width, ('Class 0', 'Class 1', 'Class 2', 'Class 3',"MicroAverage"))
+    
+    plt.xticks(index + bar_width+0.15, classList)
     plt.legend(loc="upper right",prop={'size':8})
     plt.yticks([0,0.2,0.4,0.6,0.8,1.0])
     plt.ylim([0.0, 1.39])
@@ -229,14 +243,14 @@ def drawBar(Matrix):
     plt.show()  
     
     
-    
+
 
 
 fpath=os.path.join(os.getcwd(),'raw.arff')
 getTopFeature(fpath)
 maxFeature=getMaxFeature(fpath)
 outputFolder=os.path.join(os.getcwd(),"FeatureSelected")
-command="../RankFeature.sh "+"raw.arff "+outputFolder
+command="../..//RankFeature.sh "+"raw.arff "+outputFolder
 os.system(command)
 flist=os.listdir(outputFolder)
 sets=[]
@@ -265,7 +279,7 @@ for n in range(1,maxFeature+1):
         if ls.count(str(n))>0:
             cnt+=1
     methodCnt.append(cnt)
-    print "Feature %d is selected by %d methods"%(n,cnt)
+    vennTxt+="Feature %d is selected by %d methods"%(n,cnt)+"\n"
     
 #     
 for i in range(len(methodCnt)):
@@ -288,6 +302,7 @@ aucMatrix=[] #Cotain auc values for class 0-n and Average
 
 aucList=[]
 loadTopFeature(OneList)
+print shape(aucList)
 aucMatrix.append(aucList)
 aucList=[]
 loadTopFeature(TwoList)
@@ -301,6 +316,9 @@ aucMatrix.append(aucList)
 aucList=[]
 loadTopFeature(FiveList)
 aucMatrix.append(aucList)
+
+
+
 drawBar(aucMatrix)
 
 
@@ -340,18 +358,16 @@ for key in reversed(range(1,topFeature+1)):
             
                     positiveFeatureList.append(sets[i])#find the digits with one and the set it concludes 
             outputString=outputString[:len(outputString)-2]   
-            print outputString,           
+            vennTxt+=outputString          
             interception=findIntercetion(positiveFeatureList)
-            print str(list(interception))
-            
-            
-            
-
-
+            vennTxt+=str(list(interception))
 
 plt.close()
-sys.stdout = orig_stdout
-outputFile.close()
+
+text_file = open("veenTxt.txt", "w")
+text_file.write(vennTxt)
+text_file.close()
+
 
 
         

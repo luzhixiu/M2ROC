@@ -10,7 +10,6 @@ def preprocessFile(path):
     start=False 
     for line in lines:
         if start and  not line.isspace():
-            print line
             f.write(line)       
         if "@data" in line:
             start=True
