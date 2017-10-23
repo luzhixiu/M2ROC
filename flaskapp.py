@@ -94,7 +94,7 @@ def result():
          
         with open(configPath, 'wb') as configfile:
             settings.write(configfile)               
-        call(["python", "main.py",session["username"]])
+        call(["python", "main.py","userFolder/"+session["username"]])
         print "end of result fuction"        
         return redirect(url_for('get_auc'))
     
@@ -122,7 +122,7 @@ def auclistener():
          
         with open(configPath, 'wb') as configfile:
             settings.write(configfile)
-        call(["python", "main.py",session["username"]])
+        call(["python", "main.py","userFolder/"+session["username"]])
         return redirect(url_for("page3"))
 
 @app.route('/page3',methods=['Post','GET'])
@@ -160,7 +160,7 @@ def get_zip():
 
 @app.route('/venn')
 def venn():
-    command="python drawVenn.py "+session["username"]+" "+getTopFeature()
+    command="python drawVenn.py "+"userFolder/"+session["username"]+" "+getTopFeature()
     os.system(command)
     return render_template("venn.html")
     
@@ -192,4 +192,4 @@ def user():
 
 if __name__ == '__main__':
     app.config['DEBUG'] = True    
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0",port=80)
