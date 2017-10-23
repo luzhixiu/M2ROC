@@ -12,6 +12,5 @@ java weka.filters.supervised.attribute.AttributeSelection  -E "weka.attributeSel
 
 java weka.filters.supervised.attribute.AttributeSelection  -E "weka.attributeSelection.SymmetricalUncertAttributeEval " -S "weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1" -i $1 -o $2/SymmeUncertain.csv
 
-java weka.filters.supervised.attribute.AttributeSelection  -E "weka.attributeSelection.OneRAttributeEval -S 1 -F 10 -B 6 " -S "weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1" -i $1 -o $2/OneVsRest.csv
 
 

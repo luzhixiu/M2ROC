@@ -160,7 +160,8 @@ def process(X,y,classN):
     global showClassROC
     if showClassROC:
         print "Not gonna Average the result"
-        plt.plot(class_fpr_micro, class_tpr_micro,label='Class  micro-average ROC curve (area = {0:0.2f})'''.format(roc_auc_class_micro ),linewidth=lw)
+        plt.plot(class_fpr_micro, class_tpr_micro,label='Class %d micro-average ROC curve (area = {%0.2f})'%(classN,roc_auc_class_micro),linewidth=lw)
+
     
 def loadClassifier(cls):
     global classifier,title

@@ -22,8 +22,34 @@ f=open(os.path.join(os.getcwd(),userFolder,"raw.csv"),"r")
 
 baseName=os.path.basename(f.name)
 commandString="python csvToarff.py "+baseName+" "+userFolder
+
 print commandString
 os.system(commandString)
+#set the top feature here
+def getMaxFeature():
+    path=os.path.join(os.getcwd(),userFolder,"raw.arff")
+    f=open(path,"r")
+    cnt=0
+    for line in f:
+        cnt+=1
+        splitList=line.split(" ")
+        if 'class' in splitList[1]:
+            break
+    return cnt-2   
+
+import configparser
+configPath=os.path.join(os.getcwd(),userFolder,"config.txt")
+settings = configparser.ConfigParser()
+settings._interpolation = configparser.ExtendedInterpolation()
+settings.read(configPath)
+settings.set('SectionOne', 'top feature', str(getMaxFeature()))
+with open(configPath, 'wb') as configfile:
+    settings.write(configfile)   
+
+
+
+
+
 
 f=open(os.path.join(os.getcwd(),userFolder,"raw.arff"),"r")
 
@@ -37,8 +63,11 @@ from subprocess import call
 command="./RankFeature.sh "+f.name+" "+outputFolder
 os.system(command) #works like a charm!
 
+
 # format the data for processing(rid the weka markers)
 os.chdir(os.path.join(os.getcwd(),userFolder))
+
+import rawToArff_mrmr
 import Format
 
 # process the files (cv.py)

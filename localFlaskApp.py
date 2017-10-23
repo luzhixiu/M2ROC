@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request,send_file,render_template,send_from_directory,session,escape
+from flask import Flask, redirect, url_for, request,send_file,render_template,send_from_directory,session,escape,flash
 import configparser
 from werkzeug import secure_filename
 import os
@@ -9,10 +9,13 @@ import random
 from random import choice
 import numpy as np
 from string import ascii_uppercase
+from audioop import avg
 app = Flask(__name__)
 
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
+avg="Yes"
 
 def getTopFeature():
     settings = configparser.ConfigParser()
@@ -23,6 +26,11 @@ def getTopFeature():
     topFeature=settings.get('SectionOne','top feature')
     return topFeature
 
+
+
+
+
+
 def getRandomString():
     return ''.join(choice(ascii_uppercase) for i in range(12))
 
@@ -32,6 +40,15 @@ def getRandomString():
 def make_session_permanent():
     session.permanent = True
     app.permanent_session_lifetime = timedelta(minutes=10)
+#     if 'username' not in session:
+#         return redirect(url_for('start'))
+    
+
+
+@app.errorhandler(KeyError)
+def handle_invalid_usage(error):
+    
+    return render_template("sessionOut.html")
 
 
 @app.after_request
@@ -60,7 +77,6 @@ def start():
         os.system("cp config.txt "+ os.path.join(os.getcwd(),"userFolder",session["username"]))
     
     command="cp rawiris.csv "+ os.path.join(os.getcwd(),"userFolder",session["username"],"raw.csv")
-    print command
     return render_template('form.html')
 
 @app.route('/result',methods = ['POST', 'GET'])
@@ -84,11 +100,11 @@ def result():
         settings._interpolation = configparser.ExtendedInterpolation()
         userFolder=os.path.join(os.getcwd(),"userFolder",session["username"])
         configFile=os.path.join(userFolder,"config.txt")
-        print configFile
         settings.read(configFile)
         settings.set('SectionOne', 'Classifier', str(classifier))   
         settings.set('SectionOne', 'Number of estimators', str(estimators))                
         settings.set('SectionOne', 'fold', str(fold))
+
         settings.set('SectionOne', 'Plot lengend size', str(legendsize)) 
         settings.set('SectionOne', 'Plot line width', str(plotlinewidth)) 
         settings.set('SectionOne', 'Dataset type name', str(legendtitle))        
@@ -100,20 +116,36 @@ def result():
         print "end of result fuction"        
         return redirect(url_for('get_auc'))
     
+# def getFiveRoc():
+    
+
+
+
 @app.route('/auclistener',methods = ['POST', 'GET'])
 
 @app.route('/auc',methods=['Post','GET'])
 def get_auc():
+    global avg
+#     if 'es'in avg:
+#         return render_template('auc.html')
+#     else:
+#         return reder_template('fiveRoc.html')
     return render_template('auc.html')
+    
+    
+    
+    
 
 @app.route('/AUC',methods=['Post','GET'])
 def send_AUC():
+    
     return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),"AUC.png" )
 
 @app.route('/aucListener',methods=['Post','GET'])
 def auclistener():
     if request.method == 'POST':
         maxFeature=request.form['maxrange']
+        global avg
         avg=request.form['avg']
         configPath=os.path.join(os.getcwd(),"userFolder",session["username"],"config.txt")
         settings = configparser.ConfigParser()

@@ -106,6 +106,7 @@ def numberLables():
                 splitList[len(splitList)-1]= labelDict[splitList[len(splitList)-1]]
                 writeString=",".join(str(x) for x in splitList)
                 f.write(writeString+"\n")
+
 numberLables()
 
 
@@ -250,8 +251,9 @@ fpath=os.path.join(os.getcwd(),'raw.arff')
 getTopFeature(fpath)
 maxFeature=getMaxFeature(fpath)
 outputFolder=os.path.join(os.getcwd(),"FeatureSelected")
-command="../..//RankFeature.sh "+"raw.arff "+outputFolder
+command="../../RankFeature.sh "+"raw.arff "+outputFolder
 os.system(command)
+os.system("cp mRMR.csv FeatureSelected/")
 flist=os.listdir(outputFolder)
 sets=[]
 labels=[]
