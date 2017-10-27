@@ -1,0 +1,34 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+        <h1 class="page-header">    Your ROC Results</h1>
+        
+        <font size="3">Below are your ROC resutls, you can also download all the output files using this link:</font>
+        <a href="{{url_for('get_zip')}}">Download</a>
+
+	<img id="roc" alt="Roc Result" src="{{url_for('get_ROC_Relief')}}" width:304px;height:228px;">
+	<img id="roc" alt="Roc Result" src="{{url_for('get_ROC_Mrmr')}}" width:304px;height:228px;">
+	<img id="roc" alt="Roc Result" src="{{url_for('get_ROC_GainRatio')}}" width:304px;height:228px;">
+	<img id="roc" alt="Roc Result" src="{{url_for('get_ROC_SymmetriUncertain')}}" width:304px;height:228px;">
+	<img id="roc" alt="Roc Result" src="{{url_for('get_ROC_InformationGain')}}" width:304px;height:228px;">
+
+	<img id="loading" alt="loading" src="{{ url_for('static', filename='loading.gif') }}" style="display: none;"> 
+	
+	<font size="3">You can see Venn Diagram here:</font>
+        <a href="{{url_for('venn')}}">Venn Diagram</a>
+
+	
+
+         
+        
+       
+</body>

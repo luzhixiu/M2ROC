@@ -1,0 +1,11 @@
+[SectionOne]
+classifier = SVM
+number of estimators = 10
+average the result = No
+top feature = 4
+plot lengend size = 7.5
+plot line width = 2
+dataset type name = Sample
+noise level = 0
+fold = 10
+

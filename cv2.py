@@ -50,7 +50,8 @@ if len(N_estimator)!=0:
 
 
 
-AverageRead="No"
+AverageRead=settings.get('SectionOne','average the result')
+print AverageRead
 
 if AverageRead.find("e")>0:
     showClassROC=False
@@ -159,7 +160,7 @@ def process(X,y,classN):
     global showClassROC
     if showClassROC:
         print "Not gonna Average the result"
-        plt.plot(class_fpr_micro, class_tpr_micro,label='Class %d ROC curve (area = {%0.2f})'%(classN,roc_auc_class_micro),linewidth=lw)
+        plt.plot(class_fpr_micro, class_tpr_micro,label='Class %d micro-average ROC curve (area = {%0.2f})'%(classN,roc_auc_class_micro),linewidth=lw)
 
     
 def loadClassifier(cls):
@@ -241,8 +242,7 @@ def processFile(f):
             else:
                 label[k]=0
         process(data,label,n)
-        
-
+        plt.figure()
     
         
     # print all_test.shape
@@ -291,20 +291,6 @@ def processFolder(folder):
         c+=1
         auc=processFile(path)
         aucList.append(auc)
-        plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-        plt.xlim([-0.05, 1.05])
-        plt.ylim([-0.05, 1.05])
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        
-        plt.legend(loc="lower right")
-        fname=(os.path.basename(f).split(".")[0])
-        figName=fname+" TOP_"+str(i+1)+"_Feature"
-        plt.title(title+" (%s)"%fname)
-        plt.savefig(figName)
-
-        plt.show()
-        plt.figure()
     return aucList
 
 
@@ -327,7 +313,16 @@ for i in range(originTopFeature):
     aucList=processFolder(inputFolder)
     aucMatrix.append(aucList)
     
-
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlim([-0.05, 1.05])
+    plt.ylim([-0.05, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title(title)
+    plt.legend(loc="lower right")
+    plt.savefig("TOP_"+str(i+1)+"_Feature")
+    plt.show()
+    plt.figure()
 
 NTL=defaultdict(list) # NTL is number to list
 for featureList in aucMatrix:#featureList represents features chosen

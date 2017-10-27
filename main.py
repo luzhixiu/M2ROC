@@ -71,7 +71,11 @@ import rawToArff_mrmr
 import Format
 
 # process the files (cv.py)
-import cv
+avg=settings.get('SectionOne','average the result')
+if avg.find("e")>0:
+    import cv_Average
+else:
+    import cv
 
 
 

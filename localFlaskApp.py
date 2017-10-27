@@ -101,13 +101,13 @@ def result():
         userFolder=os.path.join(os.getcwd(),"userFolder",session["username"])
         configFile=os.path.join(userFolder,"config.txt")
         settings.read(configFile)
-        settings.set('SectionOne', 'Classifier', str(classifier))   
-        settings.set('SectionOne', 'Number of estimators', str(estimators))                
+        settings.set('SectionOne', 'classifier', str(classifier))   
+        settings.set('SectionOne', 'number of estimators', str(estimators))                
         settings.set('SectionOne', 'fold', str(fold))
 
-        settings.set('SectionOne', 'Plot lengend size', str(legendsize)) 
-        settings.set('SectionOne', 'Plot line width', str(plotlinewidth)) 
-        settings.set('SectionOne', 'Dataset type name', str(legendtitle))        
+        settings.set('SectionOne', 'plot lengend size', str(legendsize)) 
+        settings.set('SectionOne', 'plot line width', str(plotlinewidth)) 
+        settings.set('SectionOne', 'dataset type name', str(legendtitle))        
         configPath=os.path.join(os.getcwd(),"userFolder",session["username"],"config.txt")
          
         with open(configPath, 'wb') as configfile:
@@ -157,12 +157,21 @@ def auclistener():
         with open(configPath, 'wb') as configfile:
             settings.write(configfile)
         call(["python", "main.py","userFolder/"+session["username"]])
-        return redirect(url_for("page3"))
-
-@app.route('/page3',methods=['Post','GET'])
-def page3():
+        if avg.find("e")>0:
+            return redirect(url_for("page3A"))
+        else:
+            return redirect(url_for("page3B"))
+        
+@app.route('/page3A',methods=['Post','GET'])
+def page3A():
     return render_template("page3.html")
     
+@app.route('/page3B',methods=['Post','GET'])
+def page3B():
+    return render_template("fiveRoc.html")
+
+
+
 
 @app.route('/getROC')
 def get_ROC():
@@ -171,16 +180,45 @@ def get_ROC():
         print rocFileName
         return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
     
+@app.route('/getROC_Relief')
+def get_ROC_Relief():
+        topFeature=getTopFeature()
+        rocFileName="Relief TOP_%s_Feature.png"%topFeature
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
 
-@app.route('/gallery')
-def get_gallery():
-    static_names = os.listdir('./static')
-    imgList=[]
-    for name in static_names:
-        if hasNumbers(name):
-            imgList.append(name)
+@app.route('/getROC_GainRatio')
+def get_ROC_GainRatio():
+        topFeature=getTopFeature()
+        rocFileName="GainRatio TOP_%s_Feature.png"%topFeature
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
+
+@app.route('/getROC_Mrmr')
+def get_ROC_Mrmr():
+        topFeature=getTopFeature()
+        rocFileName="mRMR TOP_%s_Feature.png"%topFeature
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
     
-    return render_template("gallery.html", image_names=sorted(imgList,cmp=sortByNumber))
+@app.route('/get_ROC_SymmetriUncertain')
+def get_ROC_SymmetriUncertain():
+        topFeature=getTopFeature()
+        rocFileName="SymmeUncertain TOP_%s_Feature.png"%topFeature
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
+
+@app.route('/get_ROC_InformationGain')
+def get_ROC_InformationGain():
+        topFeature=getTopFeature()
+        rocFileName="InformationGain TOP_%s_Feature.png"%topFeature
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
+
+
+
+
+
 
 
 
