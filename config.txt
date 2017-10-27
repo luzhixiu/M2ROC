@@ -3,6 +3,7 @@ classifier=SVM
 number of estimators = 10                
 Average the result = Yes           
 top feature = 10
+fold=2
 plot lengend size = 7.5
 plot line width = 2
 dataSet type name : Unbalanced 15
