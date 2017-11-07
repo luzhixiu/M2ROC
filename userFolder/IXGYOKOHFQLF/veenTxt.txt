@@ -1,5 +1,0 @@
-Feature 1 is selected by 5 methods
-Feature 2 is selected by 5 methods
-Feature 3 is selected by 5 methods
-Feature 4 is selected by 5 methods
-GainRatio & Relief & mRMR & SymmeUncertain & InformationGain ['1', '3', '2', '4']

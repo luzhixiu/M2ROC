@@ -123,12 +123,54 @@ def auclistener():
         with open(configPath, 'wb') as configfile:
             settings.write(configfile)
         call(["python", "main.py","userFolder/"+session["username"]])
-        return redirect(url_for("page3"))
+	if 'Y' in avg:
+	    return redirect(url_for("page3A"))
+	else:
+	    return redirect(url_for("page3B")) 
+        
 
-@app.route('/page3',methods=['Post','GET'])
+@app.route('/page3A',methods=['Post','GET'])
 def page3():
-    return render_template("page3.html")
-    
+    return render_template("page3A.html")
+
+@app.route('/page3B',methods=['Post','GET'])
+def page3():
+    return render_template("page3B.html")
+
+@app.route('/getRelif')
+def get_ROC():
+        topFeature=getTopFeature()
+        rocFileName="%s TOP_%s_Feature.png"%("Relief",topFeature)
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
+
+@app.route('/getGainRatio')
+def get_ROC():
+        topFeature=getTopFeature()
+        rocFileName="%s TOP_%s_Feature.png"%("GainRatio",topFeature)
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
+
+@app.route('/getInfoGain')
+def get_ROC():
+        topFeature=getTopFeature()
+        rocFileName="%s TOP_%s_Feature.png"%("InformationGain",topFeature)
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
+
+@app.route('/getSymmeUncertain')
+def get_ROC():
+        topFeature=getTopFeature()
+        rocFileName="%s TOP_%s_Feature.png"%("SymmeUncertain",topFeature)
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
+
+@app.route('/getMRMR')
+def get_ROC():
+        topFeature=getTopFeature()
+        rocFileName="%s TOP_%s_Feature.png"%("mRMR",topFeature)
+        print rocFileName
+        return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
 
 @app.route('/getROC')
 def get_ROC():

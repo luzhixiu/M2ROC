@@ -313,7 +313,6 @@ for i in range(originTopFeature):
     plt.title(title)
     plt.legend(loc="lower right")
     plt.savefig("TOP_"+str(i+1)+"_Feature")
-    plt.show()
     plt.figure()
 
 NTL=defaultdict(list) # NTL is number to list
@@ -332,7 +331,7 @@ plt.ylabel('AUC')
 plt.title("AUC")
 plt.legend(loc="lower right",prop={'size':legendSize})     
 plt.savefig("AUC")
-plt.show()    
+
     
 
 
