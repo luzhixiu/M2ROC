@@ -159,7 +159,7 @@ def process(X,y,classN):
     global showClassROC
     if showClassROC:
         print "Not gonna Average the result"
-        plt.plot(class_fpr_micro, class_tpr_micro,label='Class %d ROC curve (area = {%0.2f})'%(classN,roc_auc_class_micro),linewidth=lw)
+        plt.plot(class_fpr_micro, class_tpr_micro,label='Class %d ROC curve (AUC = %0.2f)'%(classN,roc_auc_class_micro),linewidth=lw)
 
     
 def loadClassifier(cls):
@@ -302,8 +302,6 @@ def processFolder(folder):
         figName=fname+" TOP_"+str(i+1)+"_Feature"
         plt.title(title+" (%s)"%fname)
         plt.savefig(figName)
-
-        plt.show()
         plt.figure()
     return aucList
 

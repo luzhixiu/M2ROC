@@ -61,6 +61,8 @@ def start():
     
     command="cp rawiris.csv "+ os.path.join(os.getcwd(),"userFolder",session["username"],"raw.csv")
     print command
+    response=os.system(command)
+    print response
     return render_template('form.html')
 
 @app.route('/result',methods = ['POST', 'GET'])
@@ -130,43 +132,43 @@ def auclistener():
         
 
 @app.route('/page3A',methods=['Post','GET'])
-def page3():
+def page3A():
     return render_template("page3A.html")
 
 @app.route('/page3B',methods=['Post','GET'])
-def page3():
+def page3B():
     return render_template("page3B.html")
 
-@app.route('/getRelif')
-def get_ROC():
+@app.route('/getRelief')
+def get_Relief():
         topFeature=getTopFeature()
         rocFileName="%s TOP_%s_Feature.png"%("Relief",topFeature)
         print rocFileName
         return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
 
 @app.route('/getGainRatio')
-def get_ROC():
+def get_GainRatio():
         topFeature=getTopFeature()
         rocFileName="%s TOP_%s_Feature.png"%("GainRatio",topFeature)
         print rocFileName
         return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
 
 @app.route('/getInfoGain')
-def get_ROC():
+def get_InfoGain():
         topFeature=getTopFeature()
         rocFileName="%s TOP_%s_Feature.png"%("InformationGain",topFeature)
         print rocFileName
         return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
 
 @app.route('/getSymmeUncertain')
-def get_ROC():
+def get_SymmeUncertain():
         topFeature=getTopFeature()
         rocFileName="%s TOP_%s_Feature.png"%("SymmeUncertain",topFeature)
         print rocFileName
         return send_from_directory(os.path.join(os.getcwd(),"userFolder",session["username"]),rocFileName)
 
 @app.route('/getMRMR')
-def get_ROC():
+def get_MRMR():
         topFeature=getTopFeature()
         rocFileName="%s TOP_%s_Feature.png"%("mRMR",topFeature)
         print rocFileName

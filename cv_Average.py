@@ -246,8 +246,11 @@ def processFile(f):
     fpr["micro"], tpr["micro"], _ = roc_curve(all_test.ravel(), all_probas.ravel())
     roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
     fname=os.path.basename(f).split(".")[0]
+    aucValue=roc_auc["micro"]
+    aucValue=aucValue.tolist()
+    
     plt.plot(fpr["micro"], tpr["micro"],
-             label='AUC (%s) (area = {%0.2f})'%(fname,roc_auc["micro"]),  linewidth=lw)
+             label='%s (AUC =%0.2f)'%(fname,aucValue),  linewidth=lw)
     return roc_auc["micro"]
     # all_fpr=np.unique(np.concatenate([class_fpr[i] for i in n_classes]))
     # mean_tpr = np.zeros_like(all_fpr)
