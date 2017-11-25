@@ -1,5 +1,6 @@
 
-export CLASSPATH=$CLASSPATH:/home/ubuntu/LabTool1/weka-3-8-1/weka.jar
+
+export CLASSPATH="/home/lu/eclipse-workspace/LabTool1/weka-3-8-1/weka.jar"
 echo $CLASSPATH
 echo "inputfile": $1
 echo "outputfolder": $2
