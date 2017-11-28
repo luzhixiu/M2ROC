@@ -195,7 +195,8 @@ def loadData(myFile):
 def loadTopFeature(myFile,n_feature): 
     rawdata=genfromtxt(myFile,delimiter=',')       
     rawdata=shuffle(rawdata)
-    numberOfAttribute=rawdata.shape[1]-1
+    
+
     global topFeature
     if n_feature>numberOfAttribute:
         n_feature=numberOfAttribute

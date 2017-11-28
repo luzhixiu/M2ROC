@@ -232,7 +232,95 @@ def user():
     return 'You are not logged in'
 
 
+@app.route('/networkVisual/loadFile',methods=['Post','GET'])
+def networkVisualLoadFile():
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    if not os.path.exists(netVisualFolder):
+        os.mkdir(netVisualFolder)
+    return render_template("networkVisualPage1.html")        
+
+
+@app.route('/networkVisual/getPower',methods=['Post','GET'])
+def getPower():
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    return send_from_directory(netVisualFolder,"tmp.png")
+
+
+
+@app.route('/networkVisual/config',methods=['Post','GET'])
+def networkVisualConfig():  
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    f=request.files['network']
+    if f.filename=="":
+        command="cp network.csv "+ os.path.join(netVisualFolder,"network.csv")         
+        os.system(command)
+    else:
+        f.save(os.path.join(netVisualFolder,"network.csv"))
+    netVisualSourceDir=os.path.join(os.getcwd(),"networkSrc")
+    command="%s/run.sh %s 0"%(netVisualSourceDir,netVisualFolder)
+    os.system(command)
+
+
+
+    return render_template("networkVisualPage2.html") 
+
+@app.route('/networkVisual/result',methods=['Post','GET'])
+def networkVisualResult():
+    power=request.form['power']
+    cut=request.form['cut']
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    configPath=os.path.join(netVisualFolder,"powercut.txt")
+    configString= "yes \n %s \n %s"%(power,cut)
+    f=open(configPath,"wb+")
+    f.write(configString)
+    f.close()
+    netVisualSourceDir=os.path.join(os.getcwd(),"networkSrc")
+    command="%s/run.sh %s 1"%(netVisualSourceDir,netVisualFolder)
+    os.system(command)
+    template_dir = os.path.abspath(netVisualFolder)
+
+    return redirect(url_for("sendIndex"))  
+
+
+
+@app.route('/networkVisual/index',methods=['Post','GET'])
+def sendIndex():
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    return send_from_directory(netVisualFolder,"index.html")
+
+
+@app.route('/networkVisual/style.css',methods=['POST','GET'])
+def getSytleCss():
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    return send_from_directory(netVisualFolder,"style.css")
+
+@app.route('/networkVisual/cytoscape.min.js',methods=['POST','GET'])
+def getCytoscapseMinJs():
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    return send_from_directory(netVisualFolder,"cytoscape.min.js")
+
+@app.route('/networkVisual/cy-style.json',methods=['POST','GET'])
+def getCySytle():
+    netVisualFolder=os.path.join(os.getcwd(),"userFolder",session["username"],"netVisualStatic")
+    return send_from_directory(netVisualFolder,"cy-style.json")
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=80)
+    app.config['DEBUG'] = True
+    app.run(host="0.0.0.0",port=80,threaded=True)

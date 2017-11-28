@@ -22,6 +22,8 @@ lw=2
 vennTxt=""
 
 
+userFolder=sys.argv[1]
+topFeature=int(sys.argv[2])
     
 
 
@@ -60,8 +62,6 @@ else:
 
 
 
-userFolder=sys.argv[1]
-topFeature=int(sys.argv[2])
 
 
 
@@ -213,7 +213,7 @@ def getMaxFeature(path):
 
 #take in a list of lists,each list contain class and average auc for each Set(Union, at least 2,3,4,5) 
 def drawBar(Matrix):
-    print shape(Matrix)
+    print Matrix
 #     Matrix=map(list, zip(*Matrix)) #transpose the Matrix if I set the column and row wrong
     print shape(Matrix)
     # data to plot
@@ -230,11 +230,9 @@ def drawBar(Matrix):
         plt.bar(index+gap,ls,bar_width,alpha=opacity,label=label[idx])
         gap+=bar_width
         idx+=1
-
     plt.xlabel('Class')
     plt.ylabel('AUC')
     plt.title('')
-    
     plt.xticks(index + bar_width+0.15, classList)
     plt.legend(loc="upper right",prop={'size':8})
     plt.yticks([0,0.2,0.4,0.6,0.8,1.0])
@@ -273,6 +271,9 @@ FourList=[]
 ThreeList=[]
 TwoList=[]
 OneList=[]
+
+
+
 for n in range(1,maxFeature+1):
     cnt=0;
 #     print n
@@ -283,7 +284,9 @@ for n in range(1,maxFeature+1):
     methodCnt.append(cnt)
     vennTxt+="Feature %d is selected by %d methods"%(n,cnt)+"\n"
     
-#     
+     
+
+
 for i in range(len(methodCnt)):
     if methodCnt[i]>=5:
         FiveList.append(i+1)
@@ -296,6 +299,50 @@ for i in range(len(methodCnt)):
         TwoList.append(i+1)         
     if methodCnt[i]>=5:
         OneList.append(i+1)
+
+print FiveList
+print FourList
+print ThreeList
+print TwoList
+print OneList
+print "------"
+
+mySet=[]
+
+    
+f=open("bar.txt","wb+");
+barSetString=""
+for attribute in FiveList:
+    barSetString+="attribue%s : set5 \n"%(str(attribute))
+    mySet.append(attribute)
+
+for attribute in FourList:
+    if attribute not in mySet:
+        barSetString+="attribue%s : set4 \n"%(str(attribute))
+        mySet.append(attribute)
+
+for attribute in ThreeList:
+    if attribute not in mySet:
+        barSetString+="attribue%s : set3 \n"%(str(attribute))
+        mySet.append(attribute)
+
+for attribute in TwoList:
+    if attribute not in mySet:
+        barSetString+="attribue%s : set2 \n"%(str(attribute))
+        mySet.append(attribute)
+
+for attribute in OneList:
+    if attribute not in mySet:
+        barSetString+="attribue%s : set1 \n"%(str(attribute))
+        mySet.append(attribute)
+f.write(barSetString)
+f.close()
+   
+
+
+
+
+
 
 all_test=all_probas=all_fpr=all_tpr=np.array([])
 class_fpr=class_tpr=dict()

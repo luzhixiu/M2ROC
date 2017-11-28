@@ -1,0 +1,10 @@
+fromNode	toNode	weight	direction	fromAltName	toAltName
+attribute1	attribute2	0.00302035050405142	undirected	NA	NA
+attribute1	attribute3	0.521095906854128	undirected	NA	NA
+attribute1	attribute4	0.450896223853118	undirected	NA	NA
+attribute2	attribute3	0.00715012538464415	undirected	NA	NA
+attribute2	attribute4	0.00642146727147423	undirected	NA	NA
+attribute3	attribute4	0.712526053197648	undirected	NA	NA
+attribute39	attribute56	0.000786572693159741	undirected	NA	NA
+attribute88	attribute121	0.00101140043166703	undirected	NA	NA
+attribute94	attribute123	0.000758167562163169	undirected	NA	NA

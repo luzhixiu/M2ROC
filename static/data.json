@@ -1,0 +1,4 @@
+[
+{"data": {"id":"nodeName","type" : "nodeAttr.nodesPresent..."} },
+{"data": {"id":"fromNodetoNode","source" : "fromNode","target":"toNode","weight":weight} }
+]

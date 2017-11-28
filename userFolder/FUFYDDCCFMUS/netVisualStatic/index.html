@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<!-- This code is for demonstration purposes only.  You should not hotlink to Github, Rawgit, or files from the Cytoscape.js documentation in your production apps. -->
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+
+    <title>Cola.js/Cytoscape.js</title>
+
+
+        <link href="http://208.107.219.55/networkVisual/style.css" rel="stylesheet" />
+
+          <script src="http://208.107.219.55/networkVisual/cytoscape.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/4.10.3/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/4.10.3/bootstrap-slider.min.js"></script>
+    <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-cola/1.6.0/cola.js"></script>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.js"></script>
+    <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-qtip/2.7.0/cytoscape-qtip.js"></script>
+    <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-cola/1.6.0/cytoscape-cola.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="cy"></div>
+
+    <span class="fa fa-bars config-toggle" id="config-toggle"></span>
+
+    <div id="config" class="config">
+
+      <div class="preamble">
+        <span class="label label-info">Cola.js/Cytoscape.js demo</span>
+
+        <p>This is a demo of a graph of gene-gene interactions that uses Cola.js for layout and Cytoscape.js for its graph model and visualisation.  Use the controls below to alter the Cola.js layout parameters.</p>
+        <p>
+          Data by <a href="http://genemania.org">GeneMANIA</a><br/>
+          Visualisation by <a href="http://js.cytoscape.org">Cytoscape.js</a><br/>
+          Layout by <a href="http://marvl.infotech.monash.edu/webcola/">Cola.js</a>
+        </p>
+      </div>
+
+    </div>
+    <script>
+Promise.all([
+
+])
+  .then(function(dataArray) {
+    var cy = window.cy = cytoscape({
+      container: document.getElementById('cy'),
+      style: [
+            {
+              "selector": "node",
+              "style": {
+                "label": "data(id)"
+              }
+            },
+            {
+              "selector": "node[type=\"grey\"]",
+              "style": {
+                "background-color": "grey"
+              }
+            },
+             {
+              "selector": "node[type='black']",
+              "style": {
+                "background-color": "black"
+              }
+            },
+              {
+              "selector": "node[type='brown']",
+              "style": {
+                "background-color": "brown"
+              }
+            },
+               
+            {
+              "selector": "node[type='blue']",
+              "style": {
+                "background-color": "blue"
+              }
+            },
+            {
+              "selector": "node[type='green']",
+              "style": {
+                "background-color": "green"
+              }
+            },
+            {
+              "selector": "node[type='yellow']",
+              "style": {
+                "background-color": "yellow"
+              }
+            },
+            {
+              "selector": "node[set='set2']",
+              "style": {
+                  "shape": "ellipse"
+              }
+            },
+            {
+              "selector": "node[set='set3']",
+              "style": {
+                  "shape": "rectangle"
+              }
+            },
+            {
+              "selector": "node[set='set4']",
+              "style": {
+                  "shape": "triangle"
+              }
+            },
+            {
+              "selector": "node[set='set5']",
+              "style": {
+                  "shape": "diamond"
+              }
+            },
+            {
+              "selector": "node[set='set1']",
+              "style": {
+                  "shape": "hexagon"
+              }
+            },            
+            {
+              "selector": "node[type='red']",
+              "style": {
+                "background-color": "red"
+              }
+            },
+           {
+              "selector": "node[type='turquoise']",
+              "style": {
+                "background-color": "turquoise"
+              }
+            }],
+     elements: [
+          
+{"data": {"id":"attribute1","type" : "grey"} },
+{"data": {"id":"attribute2","type" : "grey"} },
+{"data": {"id":"attribute3","type" : "grey"} },
+{"data": {"id":"attribute4","type" : "grey"} },
+{"data": {"id":"attribute39","type" : "grey"} },
+{"data": {"id":"attribute56","type" : "grey"} },
+{"data": {"id":"attribute88","type" : "grey"} },
+{"data": {"id":"attribute94","type" : "grey"} },
+{"data": {"id":"attribute121","type" : "grey"} },
+{"data": {"id":"attribute123","type" : "grey"} },
+{"data": {"id":"attribute1attribute2","source" : "attribute1","target":"attribute2","weight":0.00302035050405142} },
+{"data": {"id":"attribute1attribute3","source" : "attribute1","target":"attribute3","weight":0.521095906854128} },
+{"data": {"id":"attribute1attribute4","source" : "attribute1","target":"attribute4","weight":0.450896223853118} },
+{"data": {"id":"attribute2attribute3","source" : "attribute2","target":"attribute3","weight":0.00715012538464415} },
+{"data": {"id":"attribute2attribute4","source" : "attribute2","target":"attribute4","weight":0.00642146727147423} },
+{"data": {"id":"attribute3attribute4","source" : "attribute3","target":"attribute4","weight":0.712526053197648} },
+{"data": {"id":"attribute39attribute56","source" : "attribute39","target":"attribute56","weight":0.000786572693159741} },
+{"data": {"id":"attribute88attribute121","source" : "attribute88","target":"attribute121","weight":0.00101140043166703} },
+{"data": {"id":"attribute94attribute123","source" : "attribute94","target":"attribute123","weight":0.000758167562163169} }
+]});
+
+	
+    var params = {
+      name: 'cola',
+      nodeSpacing: 5,
+      edgeLengthVal: 45,
+      animate: true,
+      randomize: false,
+      maxSimulationTime: 1500
+    };
+    var layout = makeLayout();
+    var running = false;
+
+    cy.on('layoutstart', function(){
+      running = true;
+    }).on('layoutstop', function(){
+      running = false;
+    });
+
+    layout.run();
+
+    var $config = $('#config');
+    var $btnParam = $('<div class="param"></div>');
+    $config.append( $btnParam );
+
+    var sliders = [
+      {
+        label: 'Edge length',
+        param: 'edgeLengthVal',
+        min: 1,
+        max: 200
+      },
+
+      {
+        label: 'Node spacing',
+        param: 'nodeSpacing',
+        min: 1,
+        max: 50
+      }
+    ];
+
+    var buttons = [
+      {
+        label: '<i class="fa fa-random"></i>',
+        layoutOpts: {
+          randomize: true,
+          flow: null
+        }
+      },
+
+      {
+        label: '<i class="fa fa-long-arrow-down"></i>',
+        layoutOpts: {
+          flow: { axis: 'y', minSeparation: 30 }
+        }
+      }
+    ];
+
+    sliders.forEach( makeSlider );
+
+    buttons.forEach( makeButton );
+
+    function makeLayout( opts ){
+      params.randomize = false;
+      params.edgeLength = function(e){ return params.edgeLengthVal / e.data('weight'); };
+
+      for( var i in opts ){
+        params[i] = opts[i];
+      }
+
+      return cy.layout( params );
+    }
+
+    function makeSlider( opts ){
+      var $input = $('<input></input>');
+      var $param = $('<div class="param"></div>');
+
+      $param.append('<span class="label label-default">'+ opts.label +'</span>');
+      $param.append( $input );
+
+      $config.append( $param );
+
+      var p = $input.slider({
+        min: opts.min,
+        max: opts.max,
+        value: params[ opts.param ]
+      }).on('slide', _.throttle( function(){
+        params[ opts.param ] = p.getValue();
+
+        layout.stop();
+        layout = makeLayout();
+        layout.run();
+      }, 16 ) ).data('slider');
+    }
+
+    function makeButton( opts ){
+      var $button = $('<button class="btn btn-default">'+ opts.label +'</button>');
+
+      $btnParam.append( $button );
+
+      $button.on('click', function(){
+        layout.stop();
+
+        if( opts.fn ){ opts.fn(); }
+
+        layout = makeLayout( opts.layoutOpts );
+        layout.run();
+      });
+    }
+
+    cy.nodes().forEach(function(n){
+      var g = n.data('name');
+
+      n.qtip({
+        content: [
+          {
+            name: 'GeneCard',
+            url: 'http://www.genecards.org/cgi-bin/carddisp.pl?gene=' + g
+          },
+          {
+            name: 'UniProt search',
+            url: 'http://www.uniprot.org/uniprot/?query='+ g +'&fil=organism%3A%22Homo+sapiens+%28Human%29+%5B9606%5D%22&sort=score'
+          },
+          {
+            name: 'GeneMANIA',
+            url: 'http://genemania.org/search/human/' + g
+          }
+        ].map(function( link ){
+          return '<a target="_blank" href="' + link.url + '">' + link.name + '</a>';
+        }).join('<br />\n'),
+        position: {
+          my: 'top center',
+          at: 'bottom center'
+        },
+        style: {
+          classes: 'qtip-bootstrap',
+          tip: {
+            width: 16,
+            height: 8
+          }
+        }
+      });
+    });
+
+    $('#config-toggle').on('click', function(){
+      $('body').toggleClass('config-closed');
+
+      cy.resize();
+    });
+
+  })
+  .then(function() {
+    FastClick.attach( document.body );
+  });
+    </script>
+  </body>
+</html>

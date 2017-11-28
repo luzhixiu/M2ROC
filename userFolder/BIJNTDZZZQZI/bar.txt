@@ -1,0 +1,10 @@
+attribue1: set5 
+attribue2: set5 
+attribue3: set5 
+attribue4: set5 
+attribue45: set4 
+attribue40: set3 
+attribue41: set3 
+attribue42: set3 
+attribue43: set3 
+attribue44: set3 

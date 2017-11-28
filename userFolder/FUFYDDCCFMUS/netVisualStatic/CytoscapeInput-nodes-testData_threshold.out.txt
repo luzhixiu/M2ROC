@@ -1,0 +1,11 @@
+nodeName	altName	nodeAttr.nodesPresent...
+attribute1	NA	grey
+attribute2	NA	grey
+attribute3	NA	grey
+attribute4	NA	grey
+attribute39	NA	grey
+attribute56	NA	grey
+attribute88	NA	grey
+attribute94	NA	grey
+attribute121	NA	grey
+attribute123	NA	grey
